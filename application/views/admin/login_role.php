@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Login</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>web_assets/img/favicon.png">
+    <link href="<?= ADMIN_ASSETS_PATH ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= ADMIN_ASSETS_PATH ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="<?= ADMIN_ASSETS_PATH ?>assets/css/animate.css" rel="stylesheet">
+    <link href="<?= ADMIN_ASSETS_PATH ?>assets/css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: url(<?= ADMIN_ASSETS_PATH ?>assets/images/authentication-bg.svg);
+            background-size: contain;
+            background-position: center;
+            min-height: 100vh;
+        }
+        .customLogin {
+            width: 400px;
+            background: #e3e5ef;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .customLogo {
+            margin-top: 90px;
+        }
+        .customLogin h2 {
+            margin: 0px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="customLogo">
+        <img src="<?= ADMIN_ASSETS_PATH ?>assets/images/logo.png" style="width:290px;margin:auto;display:block;"/>
+    </div>
+    <div class="middle-box text-center loginscreen animated fadeInDown customLogin" style="width:350px">
+        <div>
+            <h2>App User Login</h2>
+            <?php if (!empty($this->session->tempdata('error_message'))) { ?>
+                <div class="alert alert-danger fade in alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <strong>Failed!</strong> <?= $this->session->tempdata('error_message') ?>
+                </div>
+            <?php } ?>
+            <form class="m-t" role="form" action="<?php echo base_url(); ?>admin/login_role/admin_login" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" id="btn_login">Login</button>
+            </form>
+            <p class="m-t"> <small>Absolutemens Version 1.0 &copy; <?php echo date('Y'); ?></small> </p>
+            <p class="m-t"> <small>Powered By Colourmoon Technologies</small> </p>
+        </div>
+    </div>
+    <script src="<?= ADMIN_ASSETS_PATH ?>assets/js/jquery-2.1.1.js"></script>
+    <script src="<?= ADMIN_ASSETS_PATH ?>assets/js/bootstrap.min.js"></script>
+</body>
+</html>

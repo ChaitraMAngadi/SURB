@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mystical-studio-406505",
+  "private_key_id": "7fa6147070dedfdd94897ba1850cf4f5d9dd5f23",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLHJN5ny6xxAb0\nMWBCsspGsMc9NgjfugfuffeTbjiKR9MbnKjqxmpMboVLIBT+xrZ7P+0rcbj6w3Sv\nBnQoA4elCk1sGMGTtamiPwJ9yXR4Spi6klrJsqUERtZjkwMI+5tiKvy1vMXAg8H7\nagbTxm6IoVFhlsoL+XPHJdk6IxfY+yBVNthUym7N6Iv4SUn+wa9PIj1iY6oEBiBl\nRwpCntdn475U1YJEtb8dcTxnkn1LHckCpTDugdWIYqSqprTbs7p4XvVUcer23amn\nkWlM0UGj3oQ1yY32DNBOGTUnJ+pv0M4Q02W4/dvS/i7nkOBjEuSOS4ydqpwS3ctk\nSaYc9IuHAgMBAAECggEAHlAsfmlQeb1s4EMCP9IZOEWn5q3K00Ebb++i5ID9tT2U\n9zkBSNDGCpQwFo86MvALSge3aNV3Kw3Cu2B2M4abVvlbprdnJJlnMMzAnW9Uj6Nq\neeXf4NxlnmbIFmJZgJy0iwkpYCJFTT8c0132mOKzmnahA7SSgQkAy4cNjYyxQXOt\nFUB1Br8uxOO4GUTfvV/50AeL/CZ8ZM4jCBD9odRMGMRLNg+GAWZDPi2giIpnVBz0\nmqselq4n7IMYGqNuEk0HoifGc2p3osQ0vpJlAVLUwKGiJUv4mlOgeyUk+iOdfgw4\nefqGDW/UurVxDv+MQdXTM3HVXCd11dSnsZb0PzKvqQKBgQD1w2SFnb7W65khpfY8\n5Qokjjo+x704BKnUKciERxbksgrLZGU8LDPPXVkx/n7nTmpy6oaVk1flCASOmpD0\nU2v8c45yg0pTiUcLI5VdizemSh6WriyhVFOdKCBYya52hvIAb5wAmPVffLqOf198\nedHCYMN8Nz2dh7jvvtxFqUvoywKBgQDTkmIcgUezGi1dQu9vjrf0s9YeLUlH2d3b\n/xX+2uUZtOvSB71aJXuB3R+WCkCvi3fGBUg3K50jVqWgqCnVoo4zxGQ+KOOrtMiY\nvLK+8f+gwZ77THVhGDrJzqRYKCuY4AFP3MKpaXppys8VXQ2u8I36IDVcpJd/9lza\n2scGM+BctQKBgCDxlTr3/0nuAPPqvExDY42s5w/dVHb64Q0IoNFieiYj26CSD6P2\nROeqGrfB5p74+vn2iB3qx2BzJ7E59O5bdGE92D1vbfour7BFj9MfQ1FuJBWMuXzS\nwfaSF2vvdQx8YFpAm8fUuSeYn6VUW6di6QRGVk4DVaYVOGwiyIIqBHvrAoGANtuw\n5tU6oxz5gEIX1WQ7HI74yPBTHPdHyIBW0rMtTkIUF2x8U4B+isisJPpZlWrjTowW\nEoATiZMw9PxFhKhWmOOmXlu51M7WaIwdCNe0wZkSwPQtR1TCAYu8H0OjMkt665tB\nOi4oWIAGu/JZ1u920NFDJNdklQBrSTALBPe0iDUCgYEAhww3hNC5jkMqwMM6hl3Q\nkNq7QPLZS/SB+xrNhtyjoGmpkagTMoLmHWP2FpBNjcW9hu2WkdWSxinan4EOdH0M\npXUrE90GSyk++VKxCce8GZHZjh7bA3ehcPcLMETmsQFgk7LbMX+ufW0vP0ovgbj/\nZsbAwixrIpCL+e0D7qkVBXY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "productstabledata@mystical-studio-406505.iam.gserviceaccount.com",
+  "client_id": "106362333645337843207",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/productstabledata%40mystical-studio-406505.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

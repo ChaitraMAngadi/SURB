@@ -1,0 +1,102 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5> Search Data</h5>
+                    <div class="ibox-tools">
+                        <a href="<?= base_url() ?>admin/dashboard">
+                            <button class="btn btn-primary">BACK</button>
+                        </a>
+                    </div>
+
+                     <?php if (!empty($this->session->tempdata('success_message'))) { ?>
+                        <div class="alert alert-success fade in alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <strong> Success!</strong> <?= $this->session->tempdata('success_message') ?>
+                        </div>
+                    <?php } ?>
+                    <?php if (!empty($this->session->tempdata('error_message'))) { ?>
+                        <div class="alert alert-danger fade in alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <strong>Failed!</strong> <?= $this->session->tempdata('error_message') ?>
+                        </div>
+                    <?php }
+                    ?>
+                </div>
+
+                
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                        <thead>
+                            
+                            <tr>
+                                    <th>#</th>
+                                    
+                                    
+                                    <th>Searched Data</th>
+                                    <th>Search Results</th>
+                                    <th>Count</th>
+                                    <th>First Searched At</th>
+
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i=1;
+                            if(sizeof($Searchdata)>0)
+                            {
+                            foreach($Searchdata as $ord){
+                                // $user = $this->db->query("select * from users where id='".$ord->user_id."'");
+                                // $users = $user->row();
+
+                            ?>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td>
+                                        <?php echo $ord->keywords;?>
+                                </td>
+                                <td>
+                                <?php
+                                                                // $serialized_data=();
+                                print_r($ord->search_results);
+                                ?>
+                                </td>
+                                <td>
+                                    <?php echo $ord->query_count;?>
+                                    </td>
+                                <td>
+                                    <?php echo $ord->created_at;?>
+                                    </td>
+                               
+
+                            </tr>
+                            
+                            
+
+    </div>
+  </div>
+</div>
+                            
+                            
+                            <?php $i++; } }else{?>
+                            <tr>
+                                <td colspan="8" style="text-align: center">
+                                    <h4>No SearchData found</h4>
+                                </td>
+                            </tr>
+                            <?php } ?> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    
+  
+
+</script> 
+
+
