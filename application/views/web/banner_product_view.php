@@ -172,7 +172,9 @@ $top3Subcategories = array_slice($subcategorySums, 0, 3, true);
                         foreach ($banner_products as $product) {
                             if($product->variant->stock>0){
                             
-                        // echo "<pre>";print_r($product->stock);exit;
+                        // echo "<pre>";print_r($product);exit;
+
+                
                             //  echo "<pre>";print_r($product->rating['reviews']);exit;
                         
                             $qry = $this->db->query("select * from attr_brands where id='" . $product->brand . "'");
@@ -182,8 +184,11 @@ $top3Subcategories = array_slice($subcategorySums, 0, 3, true);
                                 <article class=" banner single_product">
                                     <figure>
                                         <div class="product_thumb">
-                                            <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $product->seo_url; ?>"><img src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""></a>
-                                            <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $product->seo_url; ?>"><img src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""></a>
+                                            <!-- <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $product->seo_url; ?>"><img src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""></a> -->
+                                            <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($product->id, '-', TRUE); ?>/<?php echo url_title($product->name, '-', TRUE); ?>/<?php echo url_title(substr($product->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product->meta_tag_keywords, '-', TRUE); ?>"><img src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""></a>
+                                      
+                                    
+                                            <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($product->id, '-', TRUE); ?>/<?php echo url_title($product->name, '-', TRUE); ?>/<?php echo url_title(substr($product->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product->meta_tag_keywords, '-', TRUE); ?>"><img src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""></a>
                                             <div class="label_product">
                                                 <?php
                                                 //  if ($deals['on_sale'] == "active") { ?>

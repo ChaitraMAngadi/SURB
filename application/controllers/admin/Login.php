@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 //            redirect('admin/dashboard');
 //        }
 //        $this->data['site_details'] = $this->admin_model->get_row_by_id('1', 'profile');
-    }
+    } 
 
     public function index() {  
 //        $this->data['username'] = 'admin';
@@ -23,7 +23,7 @@ class Login extends CI_Controller {
          $ip = $_SERVER['REMOTE_ADDR'];
 
 //        $ipcheck = $this->admin_model->ip_checking($ip);
-        //log_message('error', json_encode($ipcheck));
+        //log_message('error', json_encode($ipcheck)); 
 
 //        if ($ipcheck != '') {
             $username = $this->input->get_post('email', TRUE);

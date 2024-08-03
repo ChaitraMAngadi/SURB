@@ -140,18 +140,22 @@
                                     <tr>
                                         <td></td><td></td><td></td><td></td><td></td>
                                         <td><b>Sub Total</b></td><td>₹<?php echo number_format($sub_total, 2); ?></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td><td></td><td></td><td></td><td></td>
                                         <td><b>Shipping Charge</b></td><td>₹<?php echo number_format($row->deliveryboy_commission, 2); ?></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td><td></td><td></td><td></td><td></td>
                                         <td><b>Total GST</b></td><td>₹<?php echo number_format(floatval($gst_total), 2); ?></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td><td></td><td></td><td></td><td></td>
                                         <!-- <td><b>Total</b></td><td>₹<?php echo number_format($row->total_price, 2); ?></td> -->
+                                        <td></td>
                                     </tr>
     <?php if ($j > 1) { ?>
                                         <tr>
@@ -171,17 +175,17 @@
     <?php $j--;
 } ?>
                                 <tr>
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr>
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr>
-                                    <td></td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     <!-- <td><b>Coupon Discount</b></td><td style="color:red">- ₹<?php echo number_format($orders[0]->coupon_disount, 2); ?></td> -->
                                 </tr>
                                 <tr>
-                                    <td></td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td></td><td></td><td></td><td></td>
                                     <!-- <td><b>Grand Total</b></td><td>₹<?php echo number_format($grand_total - ($orders[0]->coupon_disount), 2); ?></td> -->
                                 </tr>
 

@@ -60,7 +60,7 @@ class Products extends MY_Controller {
                 $data['filter'] = implode(",", $filter);
                 $data['option'] = implode(",", $option);
             }
-        }
+        } 
 
         //filters-----------------
 

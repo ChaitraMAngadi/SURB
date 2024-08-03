@@ -1,6 +1,10 @@
 <?php
 $features = $this->session->userdata('admin_login')['features'];
 $role_name = $this->session->userdata('admin_login')['role_name'];
+$this->db->where('status', 1);
+$query = $this->db->get('features');
+$features_data = $query->result_array();
+$active_features = array_column($features_data, 'name');
 ?>
  <!DOCTYPE html>
 <html>
@@ -87,7 +91,7 @@ $role_name = $this->session->userdata('admin_login')['role_name'];
                                         <li><a href="<?= base_url() ?>admin/localisation/currencies">Currencies</a></li>
                                     </ul>
                                 </li> -->
-
+                                <?php if(in_array('Locations', $active_features)  && in_array('Locations', $features)): ?>
 
                                 <li class="<?php  if($page_name == 'states' || $page_name == 'cities' || $page_name == 'locations' || $page_name == 'pincodes'){ echo 'active'; } ?>">
                                     <a>Locations
@@ -113,22 +117,15 @@ $role_name = $this->session->userdata('admin_login')['role_name'];
                                             </li>
                                     </ul>
                                 </li>
-                                
-
+                                <?php endif; ?>                  
+<?php if(in_array('Attributes', $active_features)  && in_array('Attributes', $features)||in_array('Brands', $active_features)  && in_array('Brands', $features)||in_array('Tags', $active_features)  && in_array('Tags', $features) ): ?>
 <li class="<?php  if($page_name == 'attributes' || $page_name == 'manage_attributes' || $page_name == 'brands' || $page_name == 'tags' || $page_name == 'tax'){ echo 'active'; } ?>">
 <a href="javascript:void(0);">Product Attributes
 <span class="fa arrow"></span>
 </a>
 <ul class="nav nav-second-level collapse">
-<!-- <li><a href="<?= base_url() ?>admin/colors">Colors</a></li>-->
-<?php
-$this->db->where('name', 'Attributes');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_attributes = !empty($feature) && $feature->status == 1;
-?>
 
-<?php if($show_attributes  && in_array('Attributes', $features)): ?>
+<?php if(in_array('Attributes', $active_features)  && in_array('Attributes', $features)): ?>
 <li class="<?=  $page_name == 'attributes' ? 'active' : '' ?>">
     <a href="<?= base_url() ?>admin/attributes">Attributes Types</a>
 </li> 
@@ -137,111 +134,59 @@ $show_attributes = !empty($feature) && $feature->status == 1;
 </li>
 <?php endif; ?>
 
-
-
-<?php
-$this->db->where('name', 'Brands');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_attributes = !empty($feature) && $feature->status == 1;
-?>
-
-<?php if($show_attributes  && in_array('Brands', $features)): ?>
+<?php if(in_array('Brands', $active_features)  && in_array('Brands', $features)): ?>
 <li class="<?= $page_name == 'brands' ? 'active' : '' ?>">
     <a href="<?= base_url() ?>admin/brands">Brands</a>
 </li>
 <?php endif; ?>
+<?php if(in_array('Tags', $active_features)  && in_array('Tags', $features)): ?>
 <li class="<?= $page_name == 'tags' ? 'active' : '' ?>">
     <a href="<?= base_url() ?>admin/tags">Tags</a>
 </li>
+<?php endif; ?>
 <!-- <li class="<?= $page_name == 'tax' ? 'active' : '' ?>">
     <a href="<?= base_url() ?>admin/tax">Tax Management</a>
 </li> -->
 </ul>
 
 </li>
-
-
-
-                                <?php
-// Fetch the 'Banners' feature from the database
-$this->db->where('name', 'Banners');
-$query = $this->db->get('features');
-$feature = $query->row();
-
-// Check if 'Questionaries' feature has status 1
-$show_banners = !empty($feature) && $feature->status == 1;
-?>
-
-<?php if($show_banners && in_array('Banners', $features)): ?>
+<?php endif; ?>
+<?php if(in_array('Banners', $active_features) && in_array('Banners', $features)): ?>
     <li class="<?= $page_name == 'banners' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/banners">Banners</a>
                                 </li>
 
 <?php endif; ?>
-<?php
-$this->db->where('name', 'Role');
-$query = $this->db->get('features');
-$feature = $query->row();
-
-$show_role = !empty($feature) && $feature->status == 1;
-?>
-
-<?php if($show_role && in_array('Role', $features)): ?>
+<?php if(in_array('Role', $active_features) && in_array('Role', $features)): ?>
 <li class="<?= $page_name == 'Admin_roles' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/admin_role">Admin Roles</a>
                                 </li>
                                 <?php endif; ?>
-                                <?php
-$this->db->where('name', 'App_user');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_user = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_user && in_array('App_user', $features)): ?>
+<?php if(in_array('App_user', $active_features)  && in_array('App_user', $features)): ?>
 <li class="<?= $page_name == 'Admin_users' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/admin_users">Admin Users</a>
                                 </li>
                                 <?php endif; ?>
-
-                                <!-- <li class="<?= $page_name == 'banneradds' ? 'active' : '' ?>">
-                                    <a href="<?= base_url() ?>admin/banneradds">Banners AD's</a>
-                                </li> -->
-
+                                <?php if(in_array('Categories', $active_features)  && in_array('Categories', $features)): ?>
                                 <li class="<?= $page_name == 'categories' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/categories">Categories</a>
                                 </li>
-                                <li class="<?= $page_name == 'sub_categories' ? 'active' : '' ?>">
+                                <?php endif; ?>
+                                <?php if(in_array('Sub_Categories', $active_features)  && in_array('Sub_Categories', $features)): ?>
+                                <li class="<?= $page_namSub_Categoriese == 'sub_categories' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/sub_categories">Sub Categories</a>
                                 </li>
-                             
-                                <?php
-// Fetch the 'Banners' feature from the database
-$this->db->where('name', 'Chatbot');
-$query = $this->db->get('features');
-$feature = $query->row();
+                                <?php endif; ?>
 
-// Check if 'Questionaries' feature has status 1
-$show_chatbot = !empty($feature) && $feature->status == 1;
-?>
-
-<?php if($show_chatbot && in_array('Chatbot', $features)): ?>
+<?php if(in_array('Chatbot', $active_features) && in_array('Chatbot', $features)): ?>
     <li class="<?= $page_name == 'chatbot' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/chatbot">Chat bot</a>
                                 </li>
 
 <?php endif; ?>
-<?php
-// Fetch the 'Banners' feature from the database
-$this->db->where('name', 'Payment_mode');
-$query = $this->db->get('features');
-$feature = $query->row();
 
-// Check if 'Questionaries' feature has status 1
-$show_payment_mode = !empty($feature) && $feature->status == 1;
-?>
 
-<?php if($show_payment_mode && in_array('Payment_mode', $features)): ?>
+<?php if(in_array('Payment_mode', $active_features) && in_array('Payment_mode', $features)): ?>
      
     <li class="<?= $page_name == 'payment_mode' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/payment_mode">Payment Mode</a>
@@ -249,7 +194,7 @@ $show_payment_mode = !empty($feature) && $feature->status == 1;
 
 <?php endif; ?>
                                 
-<?php
+<!-- <?php
 // Fetch the 'Banners' feature from the database
 $this->db->where('name', 'Partners');
 $query = $this->db->get('features');
@@ -257,36 +202,18 @@ $feature = $query->row();
 
 // Check if 'Questionaries' feature has status 1
 $show_partners = !empty($feature) && $feature->status == 1;
-?>
+?> -->
 
-<?php if($show_partners  && in_array('Partners', $features)): ?>
+<?php if(in_array('Partners', $active_features)  && in_array('Partners', $features)): ?>
      
     <li class="<?= $page_name == 'our_partners' ? 'active' : '' ?>">
                                     <a href="<?= base_url() ?>admin/our_partners">Our Partners</a>
                                 </li>
 
 <?php endif; ?>
-
-                               <!--  <li><a href="<?= base_url() ?>admin/filtergroups">Filter Groups</a></li>
-                                <li><a href="#">Manage App Versions</a></li>
-                                <li><a href="<?= base_url() ?>admin/payment_gateway">Payment Gateway</a></li> -->
-                            </ul>
-                        </li>
-                        <!-- <li>
-                            <a href="<?= base_url() ?>admin/attributes"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Attributes</span></a>
-                        </li> -->
-                        <!-- <li class="<?= $page_name == 'deals' ? 'active' : '' ?>">
-                            <a href="<?= base_url() ?>admin/deals"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Deals of the Day</span></a>
-                        </li> -->
-
-                        <!--<li>
-                            <a href="<?= base_url() ?>admin/deals"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Deals of the Day</span></a>
-                        </li>-->
-
-                        <!-- <li>
-                            <a href="<?= base_url() ?>admin/ads"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Ads Management</span></a>
-                        </li> -->
-
+</ul>
+</li>
+                        <?php if(in_array('Product', $active_features)&& in_array('Product', $features)  ): ?>
 
                         <li class="<?php  if($page_name == 'products' || $page_name == 'inactive_products'){ echo 'active'; } ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label"> Products</span>
@@ -301,32 +228,19 @@ $show_partners = !empty($feature) && $feature->status == 1;
                                     </li>
                             </ul>
                         </li>
+                        <?php endif; ?>
 
 
-                        <!-- <?php
-$this->db->where('name', 'Performance');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_performance = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_performance  && in_array('Performance', $features)): ?> -->
+<?php if(in_array('Performance', $active_features)  && in_array('Performance', $features)): ?> 
                         <li class="<?php  if($page_name == 'vendor_ratings'){ echo 'active'; } ?>">
                             <a href="<?= base_url() ?>admin/vendor_ratings"><i class="fa fa-star"></i> <span class="nav-label">Admin &Vendor performance matrix</span></a>
                         </li>
                         
-                        <!-- <?php endif; ?> -->
+                        <?php endif; ?>
 
 
-                        <?php
-
-$this->db->where('name', 'Coupons');
-$query = $this->db->get('features');
-$feature = $query->row();
-
-// Check if 'Questionaries' feature has status 1
-$show_coupons = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_coupons && in_array('Coupons', $features)): ?>
+   
+<?php if(in_array('Coupons', $active_features) && in_array('Coupons', $features)): ?>
 
                          <li class="<?= $page_name == 'coupons' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/coupons"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Coupon codes</span></a>
@@ -342,17 +256,9 @@ $show_coupons = !empty($feature) && $feature->status == 1;
                         </li>-->
 
                         
-                        <?php
-// Fetch the 'Questionaries' feature from the database
-$this->db->where('name', 'Questionary');
-$query = $this->db->get('features');
-$feature = $query->row();
+ 
 
-// Check if 'Questionaries' feature has status 1
-$show_questionaries = !empty($feature) && $feature->status == 1;
-?>
-
-<?php if($show_questionaries  && in_array('Questionary', $features)): ?>
+<?php if(in_array('Questionary', $active_features)   && in_array('Questionary', $features)): ?>
                         
                         <li class="<?php  if($page_name == 'questionaries' || $page_name == 'questionaries_other'){ echo 'active'; } ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label"> Questionary</span>
@@ -370,24 +276,20 @@ $show_questionaries = !empty($feature) && $feature->status == 1;
                         
                         <?php endif; ?>
 
-                        <?php
-$this->db->where('name', 'Prime');
-$query = $this->db->get('features');
-$feature = $query->row();
-
-
-$show_prime = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_prime && in_array('Prime', $features)): ?>
+ 
+<?php if(in_array('Prime', $active_features) && in_array('Prime', $features)): ?>
 
                         <li class="<?php  if($page_name == 'prime'){ echo 'active'; } ?>">
                             <a href="<?= base_url() ?>admin/prime"><i class="fa fa-user-plus" aria-hidden="true"></i> <span class="nav-label">Prime Membership</span></a>
                         </li>
-                        <?php endif; ?>                 
+                        <?php endif; ?>        
+
+                        <?php if(in_array('Filters', $active_features)  && in_array('Filters', $features)): ?> 
                          <li class="<?php  if($page_name == 'filters'){ echo 'active'; } ?>">
                             <a href="<?= base_url() ?>admin/filters"><i class="fa fa-th-large"></i> <span class="nav-label">Filters</span></a>
                         </li>
-                        
+                        <?php endif; ?>  
+                        <?php if(in_array('Orders', $active_features)  && in_array('Orders', $features)): ?> 
                         <li class="<?php if($page_name == 'orders' || $page_name == 'orders_daily' || $page_name == 'orders_weekly'|| $page_name == 'orders_monthly'){ echo 'active'; } ?>">
                         <a><i class="fa fa-shopping-cart"></i> <span class="nav-label">Orders</span>
                                 <span class="fa arrow"></span>
@@ -408,18 +310,11 @@ $show_prime = !empty($feature) && $feature->status == 1;
                                     </li>
                             </ul>
                         </li>
+                        <?php endif; ?>  
                         <!-- <li class="<?php  if($page_name == 'HeroProducts_week'){ echo 'active'; } ?>">
                             <a href="<?= base_url() ?>admin/HeroProducts_week'"><i class="fa fa-th-large"></i> <span class="nav-label">Hero Products</span></a>
                         </li> -->
-                        <?php
-$this->db->where('name', 'Hero_Products');
-$query = $this->db->get('features');
-$feature = $query->row();
-
-
-$show_hero = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_hero  && in_array('Hero_Products', $features)): ?>
+<?php if(in_array('Hero_Products', $active_features)  && in_array('Hero_Products', $features)): ?>
 
                         <li class="<?php if($page_name == 'HeroProducts_week' || $page_name == 'HeroProducts_month'){ echo 'active'; } ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label">Hero Products</span>
@@ -435,17 +330,13 @@ $show_hero = !empty($feature) && $feature->status == 1;
                                    
                             </ul>
                         </li>
-                        <?php endif; ?>                    
+                        <?php endif; ?>       
+                        <?php if(in_array('Return', $active_features)  && in_array('Return', $features)): ?>       
                         <li class="<?= $page_name == 'product_return_details' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/product_return_details"><i class="fa fa-edit"></i><span class="nav-label">Product return</span></a>
                         </li>
-                        <?php
-$this->db->where('name', 'Sales_report');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_sales = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_sales && in_array('Sales_report', $features)): ?>
+                        <?php endif; ?>   
+<?php if(in_array('Sales_report', $active_features) && in_array('Sales_report', $features)): ?>
                           <li class="<?php if($page_name == 'order_daily_reports' || $page_name == 'order_weekly_reports' || $page_name == 'order_monthly_reports'){ echo 'active'; }  ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label">Sales Reports</span>
                                 <span class="fa arrow"></span>
@@ -463,17 +354,13 @@ $show_sales = !empty($feature) && $feature->status == 1;
                             </ul>
                         </li>
                         <?php endif; ?>
-                        <?php
-$this->db->where('name', 'Performance');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_sales = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_sales && in_array('Performance', $features)): ?>
+
+<?php if(in_array('Search_data', $active_features) && in_array('Search_data', $features)): ?>
                         <li class="<?= $page_name == 'search_data' || $page_name == 'search_data' ? 'active' : '' ?>">
-                            <a href="<?= base_url() ?>admin/Vendor_ratings/searchData"><i class="fa fa-list"></i>  <span class="nav-label">Search Data</span></a>
+                            <a href="<?= base_url() ?>admin/SearchData"><i class="fa fa-list"></i>  <span class="nav-label">Search Data</span></a>
                         </li>
                        <?php endif; ?>
+                       <?php if(in_array('Vendors', $active_features) && in_array('Vendors', $features)): ?>
                        <li class="<?php if($page_name == 'vendors_shops' || $page_name == 'order_weekly_reports' || $page_name == 'inactive_vendors_shops' || $page_name == 'vendors_shops/add' || $page_name == 'vendor_Revenue'){ echo 'active'; } ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label">Vendors</span>
                                 <span class="fa arrow"></span>
@@ -492,22 +379,23 @@ $show_sales = !empty($feature) && $feature->status == 1;
                         </li>
 
                         </li>
+                        <?php endif; ?>
+                        <?php if(in_array('Payouts', $active_features) && in_array('Payouts', $features)): ?>
                         <li class="<?= $page_name =='Admin_payouts'? 'active':''?>">
                         <a href="<?= base_url() ?>admin/Admin_payouts"><i class="fa fa fa-money"></i><span class="nav-label">admin payouts</span></a>
                         </li>
+                        <?php endif; ?>
+                        <?php if(in_array('Settlements', $active_features) && in_array('Settlements', $features)): ?>
                          <li class="<?= $page_name == 'settlements' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/settlements"><i class="fa fa fa-money"></i> <span class="nav-label">Settlements</span></a>
                         </li> 
+                        <?php endif; ?>
+                        <?php if(in_array('Users', $active_features) && in_array('Users', $features)): ?>
                         <li class="<?= $page_name == 'users' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/users"><i class="fa fa-user"></i> <span class="nav-label">Users</span></a>
                         </li>
-                        <?php
-$this->db->where('name', 'Notifications');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_notifications = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_notifications && in_array('Notifications', $features)): ?>
+                        <?php endif; ?>
+<?php if(in_array('Notifications', $active_features) && in_array('Notifications', $features)): ?>
 
                         <li class="<?php if($page_name == 'notifications' || $page_name == 'notification_preferences' ){ echo 'active'; }?>">
                         <a><i class="fa fa-bell-o"></i> <span class="nav-label">Notifications</span>
@@ -525,18 +413,12 @@ $show_notifications = !empty($feature) && $feature->status == 1;
 <!--                        <li class="<?= $page_name == 'pushnotifications_list' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/Pushnotifications"><i class="fa fa-bell-o"></i> <span class="nav-label">Push Notifications</span></a>
                         </li>-->
-                        <?php
-$this->db->where('name', 'Transaction');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_transactions = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_transactions && in_array('Transaction', $features)): ?>
+<?php if(in_array('Transaction', $active_features) && in_array('Transaction', $features)): ?>
                          <li class="<?= $page_name == 'transactions' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/transactions"><i class="fa fa fa-money"></i> <span class="nav-label">Transactions</span></a>
                         </li>
                         <?php endif; ?>  
- 
+                        <?php if(in_array('Email_invoice', $active_features) && in_array('Email_invoice', $features)): ?>
                        <li class="<?php  if($page_name == 'order_delivered_invoice' || $page_name == 'order_refund_invoice' || $page_name == 'order_shipped_invoice' || $page_name == 'order_canceled_invoice' || $page_name == 'order_placed_invoice'){ echo 'active'; } ?>">
                            <a href="#"><i class="fa fa-inbox"></i><span class="nav-label">Email Invoice</span>
                                         <span class="fa arrow"></span>
@@ -565,23 +447,19 @@ $show_transactions = !empty($feature) && $feature->status == 1;
                                         
                                     </ul>
                                 </li>
+                                <?php endif; ?>  
 
-
-                        
+                                <?php if(in_array('CMS', $active_features) && in_array('CMS', $features)): ?>            
                         <li class="<?= $page_name == 'content' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/content"><i class="fa fa-book"></i> <span class="nav-label">CMS Pages</span></a>
                         </li>
-
+                        <?php endif; ?>
+                        <?php if(in_array('Testimonials', $active_features) && in_array('Testimonials', $features)): ?>
                          <li class="<?= $page_name == 'testimonials' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/testimonials"><i class="fa fa-user"></i> <span class="nav-label">Testimonials</span></a>
                         </li>
-                        <?php
-$this->db->where('name', 'Contact');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_contact = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_contact && in_array('Contact', $features)): ?>
+                        <?php endif; ?>
+<?php if(in_array('Contact', $active_features) && in_array('Contact', $features)): ?>
                         <li class="<?= $page_name == 'contact_us' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/contact_us"><i class="fa fa-user"></i> <span class="nav-label">Contact us</span></a>
                         </li>
@@ -593,18 +471,7 @@ $show_contact = !empty($feature) && $feature->status == 1;
                          <li class="<?= $page_name == 'loginlogs' ? 'active' : '' ?>">
                             <a href="<?= base_url() ?>admin/admin_logs"><i class="fa fa-lock"></i> <span class="nav-label">Admin Logs</span></a>
                         </li> -->
-                        <?php
-$this->db->where('name', 'Settings');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_settings = !empty($feature) && $feature->status == 1;
-$this->db->where('name', 'Admin_logs');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_admin = !empty($feature) && $feature->status == 1;
-
-?>
-<?php if(($show_settings || $show_admin) && (in_array('Settings', $features)||in_array('Admin_logs', $features))): ?>
+<?php if((in_array('Settings', $active_features) || in_array('Admin_logs', $active_features)) && (in_array('Settings', $features)||in_array('Admin_logs', $features))): ?>
                         <li class="<?php if($page_name == 'settings' || $page_name == 'loginlogs' ){ echo 'active'; } ?>">
                             <a><i class="fa fa-table"></i> <span class="nav-label">Settings</span>
                                 <span class="fa arrow"></span>
@@ -613,7 +480,7 @@ $show_admin = !empty($feature) && $feature->status == 1;
 
 
 
-<?php if($show_settings && in_array('Settings', $features)): ?>
+<?php if(in_array('Settings', $active_features) && in_array('Settings', $features)): ?>
                                     <li  class="<?=  $page_name == 'settings' ? 'active' : '' ?>">
                                         <a href="<?= base_url() ?>admin/settings">Settings</a>
                                     </li>
@@ -623,7 +490,7 @@ $show_admin = !empty($feature) && $feature->status == 1;
                                     <?php
 
 ?>
-<?php if($show_admin && in_array('Admin_logs', $features)): ?>                   
+<?php if(in_array('Admin_logs', $active_features) && in_array('Admin_logs', $features)): ?>                   
 
                                     <li class="<?= $page_name == 'loginlogs' ? 'active' : '' ?>">
                                         <a href="<?= base_url() ?>admin/admin_logs">Admin Logs</a>
@@ -654,13 +521,7 @@ $show_admin = !empty($feature) && $feature->status == 1;
 
 
 
-                            <?php
-$this->db->where('name', 'Notifications');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_notifications = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_notifications  && in_array('Notifications', $features)): ?>
+<?php if(in_array('Notifications', $active_features)   && in_array('Notifications', $features)): ?>
 
     <?php   
 
@@ -670,15 +531,16 @@ $show_notifications = !empty($feature) && $feature->status == 1;
 
     $admin_id = isset($admin_login['id']) ? $admin_login['id'] : null;
 
-    $admin_preferences = $this->admin_model->get_admin_preferences($admin_id);  
+    $admin_preferences = $this->admin_model->get_admin_preferences(1);  
+    // $admin_preferences = $this->admin_model->get_admin_preferences($admin_id);  
     // var_dump($admin_preferences);      
 
-    $num_rows = $this->admin_model->count_notifications($preferences); 
+    $num_rows = $this->admin_model->count_notifications($admin_preferences); 
 
     // $num_rows = count($res);     
 
                             ?>
-                          
+                           
                             <li id="here">
                                 <a href="<?= base_url() ?>admin/notifications">
                                     <i class="fa fa-bell" aria-hidden="true" style="background-color: "></i> Notifications (<?= $num_rows ? $num_rows : '0' ?>)

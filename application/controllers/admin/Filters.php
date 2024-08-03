@@ -13,6 +13,24 @@ class Filters extends MY_Controller {
             //$this->session->set_tempdata('error', 'Session Timed Out',3);
             redirect('admin/login');
         }
+        $this->db->where('name', 'Filters'); 
+        $query = $this->db->get('features');
+        $feature = $query->row();
+        $role_name = $this->session->userdata('admin_login')['role_name'];
+        if ($feature && $feature->status == 0) {
+            $redirect_url = ($role_name === 'Admin') ? 'admin/login' : 'admin/login_role';
+            $this->session->set_tempdata('error_message', 'Access Denied. You do not have permission to access this feature.', 3);
+           redirect($redirect_url);
+            exit();
+        }
+        
+        $features = $this->session->userdata('admin_login')['features'];
+        if (!in_array('Filters', $features)) {    
+            $redirect_url = ($role_name === 'Admin') ? 'admin/login' : 'admin/login_role';
+            $this->session->set_tempdata('error_message', 'Access Denied. You do not have permission to access this feature.', 3);
+            redirect($redirect_url);
+            exit(); 
+        }
         $this->load->model("admin_model");
         $this->load->model("filters_model");
         $this->load->model("vendor_model");

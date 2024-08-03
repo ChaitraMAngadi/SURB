@@ -462,6 +462,7 @@ class Admin_model extends CI_Model {
         }
     
         $res = $this->db->get($table)->row();
+
         
         return $res->notification_count;
     }

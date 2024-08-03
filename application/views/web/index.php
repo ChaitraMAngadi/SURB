@@ -446,8 +446,10 @@ We are in the testing stage, Will be happy to serve you soon
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
-                                                <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                                <!-- <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                                <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a> -->
+                                                <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                                <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
                                                 <!-- <div class="label_product"> -->
                                                 <?php  
                                                 // foreach($arr as $a){
@@ -610,7 +612,7 @@ if($deals['id']==$rat['product_id']){
                                                     <?php if ($deals['brand']) { ?>
                                                         <p class="shop-name">Brand: <?php echo $deals['brand']; ?></p>
                                                 <?php } ?>
-                                                    <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
+                                                    <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
 
                                                                                                                                                                                                                <!--                                        <p class="shop-name"><?php echo $deals['shop']; ?></p>-->
                                                     <div class="price_box">
@@ -702,8 +704,8 @@ if($deals['id']==$rat['product_id']){
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
-                                                <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                                <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                                <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
                                                 <div class="label_product">
                                                  
                                                 <?php 
@@ -848,7 +850,7 @@ if($deals['id']==$rat['product_id']){
                                                     <?php if ($deals['brand']) { ?>
                                                         <p class="shop-name">Brand: <?php echo $deals['brand']; ?></p>
                                                 <?php } ?>
-                                                    <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
+                                                    <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
 
                                                 <!-- <p class="shop-name"><?php echo $deals['shop']; ?></p> -->
                                                     <div class="price_box">
@@ -1013,7 +1015,7 @@ if($deals['id']==$rat['product_id']){
                 </div>
                <div class="forview">
                 <div class="card-container">
-
+             
                     <?php $counter = 0;
                      $count_arr = array();
                      $max1 = array('orders_placed' => 0);
@@ -1025,13 +1027,20 @@ if($deals['id']==$rat['product_id']){
                             break;
                         }
                         ?>
+    
                         
                         <div class="productcard">
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb" >
-                                        <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
-                                        <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                        <!-- <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                        <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><img src="<?php echo $deals['image']; ?>" alt=""></a> -->
+                                        <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank">
+    <img src="<?php echo $deals['image']; ?>" alt="">
+</a>
+<a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE);?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank">
+    <img src="<?php echo $deals['image']; ?>" alt="">
+</a>
                                         <!-- <div class="label_product"> -->
                                                 <?php  
                                                 // foreach($t as $a){
@@ -1185,7 +1194,7 @@ if($deals['id']==$rat['product_id']){
                                             <?php if ($deals['brand']) { ?>
                                                 <p class="shop-name">Brand: <?php echo $deals['brand']; ?></p>
                                             <?php } ?>
-                                            <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
+                                            <h4 class="product_name" title="<?php echo $deals['name']; ?>"><a href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>" target="_blank"><?php echo $deals['name']; ?></a></h4>
                                            
                                                       
                                             <div class="price_box">

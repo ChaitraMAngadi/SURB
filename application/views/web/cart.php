@@ -637,13 +637,13 @@ $show_prime = !empty($feature) && $feature->status == 1;
                                     <div class="row">
                                     
                                         <div class="col-lg-2 col-md-2 col-4 col-xs-2 col-sm-3 position-relative image_cartpage">
-                                            <a href="<?php echo base_url(); ?>web/product_view/<?php echo $product1->seo_url; ?>" ><img src="<?php echo $img; ?>" alt="" class="img-responsive img-thumbnail pro_img"></a>
+                                            <a href="<?php echo base_url(); ?>product/<?php echo url_title($product1->id, '-', TRUE); ?>/<?php echo url_title($product1->name, '-', TRUE); ?>/<?php echo url_title(substr($product1->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product1->meta_tag_keywords, '-', TRUE); ?>" ><img src="<?php echo $img; ?>" alt="" class="img-responsive img-thumbnail pro_img"></a>
      
                                         </div>
                                         
                                         <div class="col-lg-10 col-md-10 col-8 col-xs-10 col-sm-9 details_cartpage">
                                         <span class="text-center"><a onclick="deletecartitems(<?php echo $value->id; ?>)" class="remove-item"><i class="fas fa-times"></i></a></span>
-                                           <div class="details_gap"> <span class="prod_name"><a href="<?php echo base_url(); ?>web/product_view/<?php echo $product1->seo_url; ?>" ><?php echo $product1->name; ?></a></span>
+                                           <div class="details_gap"> <span class="prod_name"><a href="<?php echo base_url(); ?>product/<?php echo url_title($product1->id, '-', TRUE); ?>/<?php echo url_title($product1->name, '-', TRUE); ?>/<?php echo url_title(substr($product1->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product1->meta_tag_keywords, '-', TRUE); ?>" ><?php echo $product1->name; ?></a></span>
                                            <?php
                                               // Convert $all_brand_names to an array if it's not already an array    
                                             $all_brand_names_array = is_array($value->brand_name) ? $value->brand_name : [$value->brand_name];
@@ -831,8 +831,12 @@ $price_discount=$link->price - $value->price;
                                     <tbody>
 
                                         <tr>
-                                            <td class="product_thumb"><a href="<?php echo base_url(); ?>web/product_view/<?php echo $product1->seo_url; ?>" ><img src="<?php echo $img; ?>" alt=""></a></td>
-                                            <td class="product_name"><a href="<?php echo base_url(); ?>web/product_view/<?php echo $product1->seo_url; ?>" ><?php echo $product1->name; ?></a><br>
+                                            <td class="product_thumb">
+                                                <a href="<?php echo base_url(); ?>product/<?php echo url_title($product1->id, '-', TRUE); ?>/<?php echo url_title($product1->name, '-', TRUE); ?>/<?php echo url_title(substr($product1->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product1->meta_tag_keywords, '-', TRUE); ?>" ><img src="<?php echo $img; ?>" alt=""></a>
+                                                <!-- <a href="<?php echo base_url(); ?>web/product_view/<?php echo $product1->seo_url; ?>" ><img src="<?php echo $img; ?>" alt=""></a> -->
+                                            
+                                            </td>
+                                            <td class="product_name"><a href="<?php echo base_url(); ?>product/<?php echo url_title($product1->id, '-', TRUE); ?>/<?php echo url_title($product1->name, '-', TRUE); ?>/<?php echo url_title(substr($product1->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product1->meta_tag_keywords, '-', TRUE); ?>" ><?php echo $product1->name; ?></a><br>
 
                                                 <?php /* <p class="mb-0"><a href="<?php echo base_url(); ?>web/store/<?php echo $shopdat->seo_url; ?>/shop"><b>Shop Name :</b> <?php echo $shopdat->shop_name; ?></a></p>
 

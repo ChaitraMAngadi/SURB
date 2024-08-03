@@ -76,7 +76,8 @@
                                                    
                                                    
     <div class="product-image col-lg-2 col-3 col-xs-3 col-sm-3 col-md-2">
-    <a><form method="post" name="radio-form" id="radio-form" action="<?php echo base_url(); ?>web/product_view/<?php echo $whishlist['seo_url']; ?>" autocomplete="off">
+    <!-- <a><form method="post" name="radio-form" id="radio-form" action="<?php echo base_url(); ?>web/product_view/<?php echo $whishlist['seo_url']; ?>" autocomplete="off"> -->
+    <a><form method="post" name="radio-form" id="radio-form" action="<?php echo base_url(); ?>product/<?php echo url_title($whishlist['id'], '-', TRUE); ?>/<?php echo url_title($whishlist['name'], '-', TRUE); ?>/<?php echo url_title(substr($whishlist['descp'], 0, 20), '-', TRUE); ?>/<?php echo url_title($whishlist['meta_tag_keywords'], '-', TRUE); ?>" autocomplete="off">
                                                                 <input type="hidden" name="product_id" value="<?php echo $whishlist['id']; ?>" autocomplete="off">
                                                                 <input type="hidden" name="seo_url" value="<?php echo $whishlist['seo_url']; ?>" autocomplete="off">
                                                                 <input type="hidden" name="total_count" value="<?php echo $size; ?>" autocomplete="off">

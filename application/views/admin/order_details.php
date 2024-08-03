@@ -4,8 +4,12 @@
         @page {
             margin-top: 0;
             margin-bottom: 0;
-            margin-left: 3px;
+            /* margin-left: -35px; */
+            margin-right: 0;
         }
+        /* @page {
+            margin: 5mm 10mm; /* Adjust the margins as needed */
+        } */
         body  {
             padding-top: 0px;
             padding-bottom: 0px;
@@ -110,15 +114,15 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID(Order)</th>
-                                    <th>Vendor Details</th>
-                                    <th>Courier</th>
-                                    <th>S/N</th>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Admin commission</th>
-                                    <th>Netpayout to vendor</th>
+                                    <th >ID(Order)</th>
+                                    <th >Vendor Details</th>
+                                    <th >Courier</th>
+                                    <th >S/N</th>
+                                    <th >Product</th>
+                                    <th >Quantity</th>
+                                    <th >Price</th>
+                                    <th >Admin commission</th>
+                                    <th >Netpayout to vendor</th>
                                     <!-- <th>Amount</th> -->
                                 </tr>
                             </thead>

@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'web';
 
-$route['404_override'] = '';
+$route['404_override'] = 'custom404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['admin/admin_logs'] = 'admin/settings/admin_logs';
@@ -85,4 +85,13 @@ $route['admin/Vendors/vendor_Revenue'] = 'admin/Vendors/vendor_Revenue';
 $route['admin/add_role'] = 'admin/add_role';
 $route['admin/admin_role'] = 'admin/add_role/list_roles';
 $route['admin/admin_users'] = 'admin/add_user/list_users';
+
+$route['product'] = 'web';
+
+
+$route['product/(:any)'] = 'web/product_view/$1';
+$route['product/(:any)/(:any)'] = 'web/product_view/$1/$2';
+$route['product/(:any)/(:any)/(:any)'] = 'web/product_view/$1/$2/$3';
+$route['product/(:any)/(:any)/(:any)'] = 'web/product_view/$1/$2/$3/$4';
+$route['product/(:any)/(:any)/(:any)/(:any)'] = 'web/product_view/$1/$2/$3/$4/$5';
 

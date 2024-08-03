@@ -5,7 +5,21 @@
         
     
 <style>
-
+.noproduct {
+}
+.abs-btn{
+   height: 30px;
+   line-height: 30px;
+   padding: 0 20px;
+   text-transform: capitalize;
+   color: #ffffff;
+   background: var(--thm-blue);
+   border: 0;
+   border-radius: 30px;
+   float: left;
+   -webkit-transition: 0.3s;
+   transition: 0.3s;
+   }
 /* Add additional styling as needed */
 
     /* Add styles for the expanded and collapsed states */
@@ -111,7 +125,8 @@ opacity: 1;
     border:none;
 }
 </style>
-</head>
+</head> 
+
 <!--product details start-->
 
 <?php
@@ -1100,8 +1115,7 @@ height=" 20px" style="margin-right:5px;">
                 </div>
                 <?php }?>
             </div>
-        
-            
+      
 <!-- Include the jQuery library -->
 <!-- Include the jQuery library -->
 
@@ -1175,13 +1189,18 @@ height=" 20px" style="margin-right:5px;">
                     <?php
                    
                     foreach ($rel_pro as $value) {
+                        // print_r($value['descp']);
+                        
                         ?>
                         <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 col-3" >
                             <article class="single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="<?php echo base_url(); ?>web/product_view/<?php echo $value['seo_url']; ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a>
-                                        <a class="secondary_img" href="<?php echo base_url(); ?>web/product_view/<?php echo $value['seo_url']; ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a>
+
+                                        <!-- <a class="primary_img" href="<?php echo base_url(); ?>web/product_view/<?php echo $value['seo_url']; ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a> -->
+                                        <!-- <a class="secondary_img" href="<?php echo base_url(); ?>web/product_view/<?php echo $value['seo_url']; ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a> -->
+                                        <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($value['pid'], '-', TRUE); ?>/<?php echo url_title($value['p_name'], '-', TRUE); ?>/<?php echo url_title($value['descp'], '-', TRUE); ?>/<?php echo url_title($value['meta_tag_keywords'], '-', TRUE); ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a>
+                                        <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($value['pid'], '-', TRUE); ?>/<?php echo url_title($value['p_name'], '-', TRUE); ?>/<?php echo url_title($value['descp'], '-', TRUE); ?>/<?php echo url_title($value['meta_tag_keywords'], '-', TRUE); ?>"><img src="<?= base_url() ?>uploads/products/<?php echo $value['p_image']; ?>" alt=""></a>
                                         <div class="label_product">
                                             <?php 
                                             // if ($value['saleprice'] < $value['price']) { ?>

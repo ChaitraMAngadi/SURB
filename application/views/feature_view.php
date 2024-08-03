@@ -32,8 +32,15 @@
         form {
             width: 100%;
         }
-        .checkbox {
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
             margin-bottom: 20px;
+        }
+        .checkbox {
+            width: 48%; /* Adjust the width as needed */
+            margin-bottom: 10px;
         }
         label {
             font-size: 18px;
@@ -59,19 +66,19 @@
     <h2>Feature Status</h2>
 
     <form action="<?php echo site_url('admin/feature/update'); ?>" method="post">
-        <?php foreach ($features as $feature): ?>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="feature_<?php echo $feature->id; ?>" value="1" <?php echo ($feature->status == 1) ? 'checked' : ''; ?>>
-                    <?php echo $feature->name; ?>
-                </label>
-            </div>
-        <?php endforeach; ?>
+        <div class="checkbox-container">
+            <?php foreach ($features as $feature): ?>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="feature_<?php echo $feature->id; ?>" value="1" <?php echo ($feature->status == 1) ? 'checked' : ''; ?>>
+                        <?php echo $feature->name; ?>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <button type="submit">Update Status</button>
     </form>
 </div>
 
 </body>
 </html>
-
-

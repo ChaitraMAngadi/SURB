@@ -74,14 +74,16 @@ $top3Subcategories = array_slice($subcategorySums, 0, 3, true);
                 <div id="fav_msg" style="text-align: center;"></div>
                 <div class="row  shop_wrapper viewpro" id="products_list">
                     <?php foreach ($products as $deals) { 
-                        // print_r($deals['rating']['rating_data']);exit;
+                        // print_r($deals);exit;
                         ?>
                         <div class="filter_cards  col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xxl-3 " style="margin-top:20px;flex: 0;">
                             <article class="view_prod single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a>
-                                        <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                        <!-- <a class="primary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a> -->
+                                        <a class="primary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a>
+                                        <!-- <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $deals['seo_url']; ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a> -->
+                                        <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($deals['id'], '-', TRUE); ?>/<?php echo url_title($deals['name'], '-', TRUE); ?>/<?php echo url_title($deals['descp'], '-', TRUE); ?>/<?php echo url_title($deals['meta_tag_keywords'], '-', TRUE); ?>"><img src="<?php echo $deals['image']; ?>" alt=""></a>
                                         <div class="label_product">
                                             <?php
                                             //  if ($deals['on_sale'] == "active") { ?>

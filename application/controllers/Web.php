@@ -10,7 +10,7 @@ class Web extends MY_Controller {
 
 
         header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept,Access-Control-Request-Method, Authorization");
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accesearchdatapt,Access-Control-Request-Method, Authorization");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         parent::__construct();
         $this->load->helper(array('url', 'html', 'form'));
@@ -2086,8 +2086,8 @@ $data['rating2']=$rate2;
         die;
     }
 
-    function product_view($seo_url, $seach_keyword = null) {
-        //echo $this->uri->segment(3); die;
+    function product_view($id=null,$seo_url=null, $seach_keyword = null) {
+
         if ($this->uri->segment(3) != '') {
             //$data['search_title'] = $this->uri->segment(4);
             $data['search_title'] = str_replace("-", " ", $seach_keyword);
@@ -2112,8 +2112,14 @@ $data['rating2']=$rate2;
         
 
         $session_id = $_SESSION['session_data']['session_id'];
-        $qry = $this->db->query("select * from products where seo_url='" . $seo_url . "'");
+        $qry = $this->db->query("select * from products where id='" . $id . "'");
         $product_row = $qry->row();
+
+
+        if (!$product_row) {
+            redirect('404_override');
+            return;
+        }
 
         $product_id = $product_row->id;
         $cat_id = $product_row->cat_id;
@@ -2162,6 +2168,7 @@ $data['rating2']=$rate2;
         $data['title'] = 'Product Details';
         $data['searchbar'] = 'hide';
         $data['rating'] = $this->Web_model->rating_data($product_id);
+        
         // pr($data['rating']);
 //pr($data['linkvarinats']);
         $this->load->view("web/includes/header_styles", $this->data);
@@ -5580,7 +5587,7 @@ $this->db->update('orders',$ar2);
         // echo "<pre>";
         // print_r($chk);
         // exit;  
-        die;
+        // die;
     }
 
     function storesearchdata() {
@@ -5781,7 +5788,7 @@ $this->db->update('orders',$ar2);
             $this->load->view('web/viewallproducts.php', $data);
             $this->load->view("web/includes/footer", $this->data);
         } else if ($url == 'trending') {
-            $data['title'] = 'TRENDING OFFERS';
+            $data['title'] = 'TRENDING OFFERS'; 
             $config = array();
             $config["base_url"] = base_url() . "web/viewallProducts/trending/";
             $config["total_rows"] = $this->Web_model->getTrendingProductsCount($user_id);

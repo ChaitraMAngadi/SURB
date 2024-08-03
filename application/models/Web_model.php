@@ -1347,7 +1347,7 @@ $variants_wish['wish_details'] = $this->common_model->get_data_with_condition(['
 
                 if ($value->id != '' && $category->status > 0) {
 
-                    $ar[] = array('id' => $value->id, 'variant_id' => $value->variant_id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $brand->brand_name, 'shop' => $value->shop_name, 'shop_seo_url' => $value->shop_seo_url, 'price' => $price, 'saleprice' => $slaeprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'attribute' => $attributes,'wish_details'=>$variants_wish['wish_details'],'wishlist_id'=>$wishlist_id,'userid'=>$userid,'cart_limit'=>$cart_limit);
+                    $ar[] = array('id' => $value->id,'descp'=>substr($value->descp, 0, 20), 'meta_tag_keywords'=>$value->meta_tag_keywords, 'variant_id' => $value->variant_id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $brand->brand_name, 'shop' => $value->shop_name, 'shop_seo_url' => $value->shop_seo_url, 'price' => $price, 'saleprice' => $slaeprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'attribute' => $attributes,'wish_details'=>$variants_wish['wish_details'],'wishlist_id'=>$wishlist_id,'userid'=>$userid,'cart_limit'=>$cart_limit);
                 }
             }
 
@@ -2551,11 +2551,11 @@ $pro_res=$pro_qry->row();
                             $in_cart = $this->db->where(['session_id' => $session_id, 'variant_id' => $variants[0]->id])->get('cart')->num_rows();
                             $cart_limit = $this->db->where('id', $value->id)->get('products')->row()->cart_limit;
                             if ($new_arrival == null) {
-                                $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=> $cart_limit);
+                                $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id,'descp'=>substr($value->descp, 0, 20), 'meta_tag_keywords'=>$value->meta_tag_keywords,'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                             } else {
                                 $date = strtotime("-30 day");
                                 if ($value->created_at >= $date) {
-                                    $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=> $cart_limit);
+                                    $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id,'descp'=>substr($value->descp, 0, 20), 'meta_tag_keywords'=>$value->meta_tag_keywords,'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                                 }
                             }
                         }
@@ -2630,7 +2630,7 @@ $pro_res=$pro_qry->row();
                             $in_cart = $this->db->where(['session_id' => $session_id, 'variant_id' => $variants[0]->id])->get('cart')->num_rows();
                             $cart_limit = $this->db->where('id', $value->id)->get('products')->row()->cart_limit;
                             $count = $this->common_model->count_rows_with_conditions('most_viewed_products', ['product_id' => $value->id]);
-                            $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'rating'=>$rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
+                            $ar[] = array('id' => $value->id,'descp'=>substr($value->descp, 0, 20),'meta_tag_keywords'=>$value->meta_tag_keywords, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'rating'=>$rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                         }
                     }
                 }
@@ -2730,7 +2730,7 @@ $pro_res=$pro_qry->row();
                             $in_cart = $this->db->where(['session_id' => $session_id, 'variant_id' => $variants[0]->id])->get('cart')->num_rows();
                             $cart_limit = $this->db->where('id', $value->id)->get('products')->row()->cart_limit;
                             $count = $this->common_model->count_rows_with_conditions('most_viewed_products', ['product_id' => $value->id]);
-                            $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
+                            $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id,'descp'=>substr($value->descp, 0, 20), 'meta_tag_keywords'=>$value->meta_tag_keywords,'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'visited_count' => $count, 'in_cart' => $in_cart,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                         }
                     }
                 }
@@ -6175,9 +6175,15 @@ if ($category) {
             $category_status = $this->common_model->count_rows_with_conditions('categories', ['id' => $product->cat_id, 'status' => 1]);
 
             if ($chk_shop_status == 1 && $stock > 0 && $category_status > 0) {
-                $output .= '<li><a href="' . base_url() . 'web/product_view/' . $product->seo_url . '">' . $product->name . '</a></li>';
+                // $output .= '<li><a href="' . base_url() . 'web/product_view/' . $product->seo_url . '">' . $product->name . '</a></li>';
+                $output .= '<li><a href="' . base_url() . 'product/' 
+           . url_title($product->id, '-', TRUE) . '/' 
+           . url_title($product->name, '-', TRUE) . '/' 
+           . url_title(substr($product->descp, 0, 20), '-', TRUE) . '/' 
+           . url_title($product->meta_tag_keywords, '-', TRUE) . '">' 
+           . $product->name . '</a></li>';
             }
-        }
+        } 
 
         print_r($output);
         die;
@@ -9101,7 +9107,7 @@ if (!$brand_matched) {
             foreach ($dat as $value) {
                 // print_r($value->id);
                 // exit;
-                $pro_qry=$this->db->query("select orders_placed from products where id='".$value->id."'");
+                $pro_qry=$this->db->query("select orders_placed,descp,meta_tag_keywords from products where id='".$value->id."'");
                 $pro_res=$pro_qry->row();
                 $category = $this->common_model->get_data_row(['id' => $value->cat_id, 'status' => 1], 'categories');
                 // $row->rating=$this->Web_model->rating_data($value->id);
@@ -9143,13 +9149,15 @@ if (!$brand_matched) {
                             $cart_limit = $this->db->where('id', $value->id)->get('products')->row()->cart_limit;
                             $rating=$this->web_model->rating_data($value->id);
                             if ($new_arrival == null) {
-                                $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'rating'=>$rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
+                                $ar[] = array('id' => $value->id, 'meta_tag_keywords'=>$value->meta_tag_keywords,
+                                'descp'=>substr($value->descp, 0, 20),'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'rating'=>$rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                             } else {
                                 $date = strtotime("-30 day");
                                 // pr(date('Y-m-d',$date));
                                 // pr(date('Y-m-d',$value->created_at));
                                 if ($value->created_at >= $date) {
-                                    $ar[] = array('id' => $value->id, 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'rating'=>$row->rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
+                                    $ar[] = array('id' => $value->id, 'meta_tag_keywords'=>$value->meta_tag_keywords,
+                                    'descp'=>substr($value->descp, 0, 20), 'variant_id' => $variants[0]->id, 'shop_id' => $value->shop_id, 'variant_product' => $value->variant_product, 'name' => $value->name, 'category_name' => $category->category_name, 'subcategory_name' => $subcategory->sub_category_name, 'brand' => $value->brand, 'shop' => $shop->shop_name, 'price' => $variants[0]->price, 'saleprice' => $variants[0]->saleprice, 'image' => $img, 'availabile_stock_status' => $value->availabile_stock_status, 'whishlist_status' => $stat, 'seo_url' => $value->seo_url, 'in_cart' => $in_cart,'rating'=>$row->rating,'stock'=>$variants[0]->stock,'orders_placed'=>$pro_res->orders_placed,'cart_limit'=>$cart_limit);
                                 }
                             }
                         }
@@ -10245,6 +10253,9 @@ if (!$brand_matched) {
 
         //print_r($cat_id); die;
         $products_get = $this->db->where(array("cat_id" => $cat_id, 'status' => 1, 'availabile_stock_status' => 'available'))->get("products")->result();
+        // echo "<pre>";
+        // print_r($products_get);
+        // exit;
         //echo $this->db->last_query(); die;
         $products = [];
         foreach ($products_get as $product) {
@@ -10258,9 +10269,7 @@ if (!$brand_matched) {
             //echo "<pre>";print_r($products); die;
             $array = [];
             foreach ($products as $value) {
-                // echo "<pre>";
-                // print_r($value);
-                // exit;
+           
                 $p_name = $value->name;
                 //$brand_id = $value->brand;
                 $brand = $this->db->where(array("id" => $value->brand))->get("attr_brands")->row();
@@ -10288,41 +10297,22 @@ if (!$brand_matched) {
                 }
 
 
-                //                 $qry_var = $this->db->query("SELECT variant_id, vendor_id, COUNT(*) as row_count
-//                 FROM cart
-//                 WHERE variant_id = '" . $link_variant->id . "' 
-//                 AND vendor_id = '" . $value->shop_id . "' 
-//                 AND is_checkout = 1 
-//                 AND check_out = 0
-//                 GROUP BY variant_id, vendor_id
-//                 ORDER BY row_count DESC
-//                 LIMIT 3");
-
-// $re_var = $qry_var->result();
-
-// // If you also want to see the result set, you can print it
-// // echo "<pre>";
-// // print_r($re_var);
-// // $count_arr=array();
-// foreach($re_var as $va){
-// $count_arr[]=$va->row_count;
-// }
-
-// exit;
-
                 //check already in cart or not
                 $session_id = $_SESSION['session_data']['session_id'];
                 $in_cart = $this->db->where(['session_id' => $session_id, 'variant_id' => $link_variant->id])->get('cart')->num_rows();
                 $rate_data=$this->web_model->rating_data($value->id);
-                $pro_qry=$this->db->query("select sub_cat_id,orders_placed from products where id='".$value->id."'");
+                $pro_qry=$this->db->query("select sub_cat_id,orders_placed,descp from products where id='".$value->id."'");
                 $pro_res=$pro_qry->row();
+                // print_r($pro_res->descp);
+                // exit();
                 $cat_query=$this->db->query("select category_name from categories where id='".$cat_id."'");
                 $cat_query_res=$cat_query->row();
-
+                
                 $sub_query=$this->db->query("select sub_category_name from sub_categories where id='".$pro_res->sub_cat_id."'");
                 $sub_query_res=$sub_query->row();
+           
                 $cart_limit = $this->db->where('id', $value->id)->get('products')->row()->cart_limit;
-                $arr = array("cat_id" => $cat_id,"rate_data"=>$rate_data, "pid" => $value->id, "p_name" => $p_name, "whishlist_status" => $stat, "variant_id" => $link_variant->id, "seo_url" => $value->seo_url, "brand_name" => $brand_name, "price" => $price, "saleprice" => $saleprice, "p_image" => $p_image, "link_variant" => $link_variant->id, "shop_id" => $value->shop_id, 'in_cart' => $in_cart,'orders_placed'=>$pro_res->orders_placed,'category_name'=>$cat_query_res->category_name,'sub_category_name'=>$sub_query_res->sub_category_name,'stock'=>$link_variant->stock,'cart_limit'=>$cart_limit);
+                $arr = array("cat_id" => $cat_id,"descp"=>substr($pro_res->descp, 0, 20),"rate_data"=>$rate_data,'meta_tag_keywords'=>$value->meta_tag_keywords, "pid" => $value->id, "p_name" => $p_name, "whishlist_status" => $stat, "variant_id" => $link_variant->id, "seo_url" => $value->seo_url, "brand_name" => $brand_name, "price" => $price, "saleprice" => $saleprice, "p_image" => $p_image, "link_variant" => $link_variant->id, "shop_id" => $value->shop_id, 'in_cart' => $in_cart,'orders_placed'=>$pro_res->orders_placed,'category_name'=>$cat_query_res->category_name,'sub_category_name'=>$sub_query_res->sub_category_name,'stock'=>$link_variant->stock,'cart_limit'=>$cart_limit);
                 if ($link_variant) {
                     array_push($array, $arr);
                 }

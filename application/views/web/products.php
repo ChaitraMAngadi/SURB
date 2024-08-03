@@ -673,8 +673,8 @@ foreach ($priceRanges as $range) {
                   <article class="single_product" style="margin-bottom:20px;">
                      <figure>
                         <div class="product_thumb">
-                           <a class="primary_img myimg" href="<?php echo base_url(); ?>single-product/<?php echo $product->seo_url; ?>" target="_blank"><img data-src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""class="lozad" loading="lazy"></a>
-                           <a class="secondary_img" href="<?php echo base_url(); ?>single-product/<?php echo $product->seo_url; ?>" target="_blank" style="visibility:hidden;"><img data-src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt="" style="visibility:hidden;" class="lozad" loading="lazy"></a>
+                           <a class="primary_img myimg" href="<?php echo base_url(); ?>product/<?php echo url_title($product->id, '-', TRUE); ?>/<?php echo url_title($product->name, '-', TRUE); ?>/<?php echo url_title(substr($product->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product->meta_tag_keywords, '-', TRUE); ?>" target="_blank"><img data-src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt=""class="lozad" loading="lazy"></a>
+                           <a class="secondary_img" href="<?php echo base_url(); ?>product/<?php echo url_title($product->id, '-', TRUE); ?>/<?php echo url_title($product->name, '-', TRUE); ?>/<?php echo url_title(substr($product->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product->meta_tag_keywords, '-', TRUE); ?>" target="_blank" style="visibility:hidden;"><img data-src="<?= base_url('uploads/products/') ?><?= $product->product_image ?>" alt="" style="visibility:hidden;" class="lozad" loading="lazy"></a>
                            <div class="label_product">
                            <?php 
 

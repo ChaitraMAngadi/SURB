@@ -12,7 +12,7 @@ class Tags extends CI_Controller {
             //$this->session->set_tempdata('error', 'Session Timed Out',3);
             redirect('admin/login');
         }
-        $this->db->where('name', 'Attributes');
+        $this->db->where('name', 'Tags');
         $query = $this->db->get('features');
         $feature = $query->row();
         $role_name = $this->session->userdata('admin_login')['role_name'];
@@ -24,7 +24,7 @@ class Tags extends CI_Controller {
         }
 
         $features = $this->session->userdata('admin_login')['features'];
-        if (!in_array('Attributes', $features)) {
+        if (!in_array('Tags', $features)) {
             // Redirect to login or an access denied page
            
             $redirect_url = ($role_name === 'Admin') ? 'admin/login' : 'admin/login_role';

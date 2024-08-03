@@ -92,5 +92,29 @@ public function reduce_role_max_users($role_id) {
     $this->db->set('max_users', 'max_users-1', FALSE);
     $this->db->where('id', $role_id);
     return $this->db->update('roles');
-}    
+}  
+public function delete_role($role_id) {
+    // Check for users with this role
+    $this->db->select('email');
+    $this->db->where('role_id', $role_id);
+    $user_query = $this->db->get('app_users');
+
+    if ($user_query->num_rows() > 0) {
+        // Users exist, return their emails
+        $user_emails = array_column($user_query->result_array(), 'email');
+        return [
+            'success' => false, 
+            'message' => 'Cannot delete role. Users associated with this role: ' . implode(', ', $user_emails)
+        ];
+    }
+
+    // No users with this role, delete role and associated features
+    $this->db->where('role_id', $role_id);
+    $this->db->delete('role_features');
+
+    $this->db->where('id', $role_id);
+    $this->db->delete('roles');
+
+    return ['success' => true, 'message' => 'Role deleted successfully.'];
+}  
 }

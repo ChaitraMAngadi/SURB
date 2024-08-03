@@ -108,7 +108,7 @@ class Notifications extends MY_Controller {
             $preferences = $this->input->post('preferences');
             $preferencesJSON = json_encode($preferences);
     
-            $this->db->where('id', $admin_id);
+            $this->db->where('id',1);
             if ($this->db->update('admin', ['notification_preferences' => $preferencesJSON])) {
                 // Update successful
                 $this->session->set_tempdata('success_message', 'Preferences updated successfully', 3);
@@ -125,7 +125,7 @@ class Notifications extends MY_Controller {
         $data['page_name'] = 'notification_preferences';
     
         $this->db->select('notification_preferences');
-        $this->db->where('id', $admin_id);
+        $this->db->where('id', 1);
         $admin = $this->db->get('admin')->row();
     
         $data['preferences'] = json_decode($admin->notification_preferences, true) ?: [];  // Default to an empty array if null.
@@ -141,7 +141,7 @@ class Notifications extends MY_Controller {
         $admin_id = $this->session->userdata('admin_login')['id'];  // Get admin ID from session data
         
                                                                             
-        $preferences = $this->admin_model->get_admin_preferences($admin_id);  // Method to fetch preferences
+        $preferences = $this->admin_model->get_admin_preferences(1);  // Method to fetch preferences
     
         
         $data['page_name'] = 'notifications';

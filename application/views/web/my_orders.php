@@ -175,7 +175,7 @@ if (($user_expiry_date != null && $user_expiry_date >= $date && $user_qry_res->e
                                 <div class="col-lg-2 col-2 col-xs-2 col-sm-2 col-md-2 square" >
                                     <span width="100" data-title="Product" class="product_thumb1">
                                     <?php
-                                    $qry = $this->db->query("select seo_url from products where id='" . $cartdata['product_id'] . "'");
+                                    $qry = $this->db->query("select id,name,descp,meta_tag_keywords from products where id='" . $cartdata['product_id'] . "'");
                                     $product_row = $qry->row();
                                     // print_r($product_row->seo_url);
 // Assuming $str is your input string
@@ -193,7 +193,8 @@ if (($user_expiry_date != null && $user_expiry_date >= $date && $user_qry_res->e
 // $final_seo_url = $cartdata['product_id']."_".$seo_url;
 ?>
 
-<a href="<?php echo base_url() . 'single-product/' . $product_row->seo_url; ?>" target="_blank">
+<!-- <a href="<?php echo base_url() . 'single-product/' . $product_row->seo_url; ?>" target="_blank"> -->
+<a href="<?php echo base_url(); ?>product/<?php echo url_title($product_row->id, '-', TRUE); ?>/<?php echo url_title($product_row->name, '-', TRUE); ?>/<?php echo url_title(substr($product_row->descp, 0, 20), '-', TRUE); ?>/<?php echo url_title($product_row->meta_tag_keywords, '-', TRUE); ?>" target="_blank">
     <img src="<?php echo $cartdata['image']; ?>" alt="" class="order-img">
 </a>
                                     </span>

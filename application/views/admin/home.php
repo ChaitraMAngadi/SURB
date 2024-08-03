@@ -1,4 +1,11 @@
-
+<?php
+$features = $this->session->userdata('admin_login')['features'];
+$role_name = $this->session->userdata('admin_login')['role_name'];
+$this->db->where('status', 1);
+$query = $this->db->get('features');
+$features_data = $query->result_array();
+$active_features = array_column($features_data, 'name');
+?>
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +32,10 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
+                    <?php if(in_array('Users', $active_features) && in_array('Users', $features)): ?>
                         <div class="col-md-3">
                             <a href="<?php echo base_url(); ?>admin/users">
-                                <div class="widget style1 navy-bg">
+                                <div class="widget style1 navy-bg"> 
                                     <div class="row">
                                        <div class="col-xs-12 text-center">
                                             <span> Users </span>
@@ -38,8 +45,8 @@
                                 </div>
                             </a>
                         </div>
-
-                        
+                        <?php endif; ?>
+                        <?php if(in_array('Vendors', $active_features) && in_array('Vendors', $features)): ?>
                         <div class="col-md-3">
                             <div class="widget style1 navy-bg">
                                 <a style="color: #FFF;" href="<?php echo base_url(); ?>admin/vendors_shops"><div class="row">
@@ -52,7 +59,6 @@
                                 </div></a>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="widget style1 navy-bg">
                                 <a style="color: #FFF;" href="<?php echo base_url(); ?>admin/inactive_vendors_shops"><div class="row">
@@ -65,7 +71,7 @@
                                 </div></a>
                             </div>
                         </div>
-
+                        <?php endif; ?>
                     <!-- <div class="col-md-3">
                         <div class="widget style1 bg-danger">
                             <div class="row">
@@ -110,7 +116,7 @@
                     </div>
                     
 
-
+                    <?php if(in_array('Product', $active_features)&& in_array('Product', $features)  ): ?>
                     <div class="col-md-4">
                        <a href="<?php echo base_url(); ?>admin/products">
                         <!-- <a href="javascript:void(0)"> -->
@@ -132,7 +138,8 @@
                     </a>
 
                     </div>
-
+                    <?php endif; ?>
+                    <?php if(in_array('Categories', $active_features)  && in_array('Categories', $features)): ?>
                     <div class="col-md-4">
 
                             <a href="<?php echo base_url(); ?>admin/categories">
@@ -158,10 +165,10 @@
                             </a>
 
                         </div>
-
+                        <?php endif; ?>
 
                    
-
+                    <?php if(in_array('Orders', $active_features)  && in_array('Orders', $features)): ?> 
                     <div class="col-md-4">
 
                         <div class="widget style1 blue-bg">
@@ -182,7 +189,8 @@
                         </div>
 
                     </div>
-
+                    <?php endif; ?>
+                    <?php if(in_array('Transaction', $active_features) && in_array('Transaction', $features)): ?>
                     <div class="col-md-4">
 
                             <a href="<?php echo base_url(); ?>admin/transactions">
@@ -208,7 +216,8 @@
                             </a>
 
                         </div>
-
+                        <?php endif; ?>
+                        <?php if(in_array('Product', $active_features)&& in_array('Product', $features)  ): ?>
                         <div class="col-md-4">
 
                             <a href="<?php echo base_url(); ?>admin/products">
@@ -258,7 +267,7 @@
                             </a>
 
                         </div>
-
+                        <?php endif; ?>
 
 
                 </div>
@@ -569,13 +578,7 @@
                     </div>
 
                 </div>-->
-                <?php
-$this->db->where('name', 'Sales_report');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_sales = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_sales): ?>
+<?php if(in_array('Sales_report', $active_features) && in_array('Sales_report', $features)): ?>
                 <div class="row" >
 
                     <div class="col-md-12">
@@ -774,13 +777,8 @@ $show_sales = !empty($feature) && $feature->status == 1;
                 </div>
 
                 <?php endif; ?>
-                <?php
-$this->db->where('name', 'AOV');
-$query = $this->db->get('features');
-$feature = $query->row();
-$show_AOV = !empty($feature) && $feature->status == 1;
-?>
-<?php if($show_AOV): ?>
+
+ <?php if(in_array('AOV', $active_features) && in_array('AOV', $features)): ?>
                 <div class="row">
                     <div class="col-md-12">
                         <h2>Average Order Value(AOV)</h2><hr>
@@ -853,7 +851,7 @@ $show_AOV = !empty($feature) && $feature->status == 1;
                 </div>
                
                 <?php endif; ?>
-                
+                <?php if(in_array('Payouts', $active_features) && in_array('Payouts', $features)): ?>
 
                 <div class="row" >
 
@@ -1003,7 +1001,7 @@ $show_AOV = !empty($feature) && $feature->status == 1;
 
                         </div>
 
-                
+                        <?php endif; ?>
 
 
                 </div>

@@ -116,7 +116,7 @@ class Add_role extends CI_Controller {
         $this->load->model('RoleModel');
         $this->load->model('FeatureModel');
         
-        // Fetch role details
+        // Fetch role details 
         $data['role'] = $this->RoleModel->get_role($role_id);
         
         // Fetch all features
@@ -179,5 +179,10 @@ class Add_role extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-       
+    public function delete($role_id) {
+        $result = $this->RoleModel->delete_role($role_id);
+
+        header('Content-Type: application/json');
+        echo json_encode($result);
+    }  
 }
