@@ -35,7 +35,7 @@ class Inactive_products extends MY_Controller {
 
         $config['base_url'] = base_url() . 'vendors/inactive_products';
         $config['total_rows'] = $this->data['count_data'] = $count->num_rows();
-        $config['per_page'] = 10;
+        $config['per_page'] = 100;
         // $this->data['page_title'] = 'Total '.$config['total_rows'].' Books';
         $config['page_query_string'] = true;
         $config['num_links'] = 5;
@@ -689,169 +689,294 @@ class Inactive_products extends MY_Controller {
         }
     }
 
+    // function insert_product() {
+
+    //     $productimage = $this->upload_multiplefile('images');
+
+    //     $variant_product = $this->input->get_post('variant_product');
+
+    //     if ($this->input->get_post('brand') != '') {
+    //         $brand = $this->input->get_post('brand');
+    //     } else {
+    //         $brand = 0;
+    //     }
+
+    //     if ($this->input->get_post('product_tags') != '') {
+
+    //         $producttags = implode(",", $this->input->get_post('product_tags'));
+    //     } else {
+
+    //         $producttags = '';
+    //     }
+
+    //     if ($this->input->get_post('priority') != '') {
+
+    //         $priority = $this->input->get_post('priority');
+    //     } else {
+
+    //         $priority = "";
+    //     }
+        
+    //     if ($this->input->get_post('cart_limit') != '') {
+
+    //         $cart_limit = $this->input->get_post('cart_limit');
+    //     } else {
+
+    //         $cart_limit = "";
+    //     }
+    //     $optionIdString = $this->input->get_post('option_id');
+
+      
+    //     if (!empty($optionIdString) && is_string($optionIdString)) {
+    //         $optionIdArray = explode(",", $optionIdString);
+            
+            
+    //         $implodedOptionIds = implode(",", $optionIdArray);
+        
+     
+    //     }
+
+    //     $ar = array(
+    //         'shop_id' => $_SESSION['vendors']['vendor_id'],
+    //         'name' => $this->input->get_post('name'),
+    //         'cat_id' => $this->input->get_post('cat_id'),
+    //         'sub_cat_id' => $this->input->get_post('sub_cat_id'),
+    //         'ques_id' => $this->input->get_post('ques_id'),
+          
+    //         'option_id' => $implodedOptionIds,
+    //         'key_features' => $this->input->get_post('key_features'),
+    //         'descp' => $this->input->get_post('description'),
+    //         'about' => $this->input->get_post('about'),
+    //         'how_to_use' => $this->input->get_post('how_to_use'),
+    //         'status' => 0,
+    //         'created_at' => time(),
+    //         'product_tags' => $producttags,
+    //         'return_noof_days' => $this->input->get_post('return_noof_days'),
+    //         'meta_tag_title' => $this->input->get_post('meta_tag_title'),
+    //         'meta_tag_description' => $this->input->get_post('meta_tag_description'),
+    //         'meta_tag_keywords' => $this->input->get_post('meta_tag_keywords'),
+    //         'brand' => $brand,
+    //         'cancel_status' => $this->input->get_post('cancel_status'),
+    //         'top_deal' => $this->input->get_post('deal_product'),
+    //         'priority' => $priority,
+    //         'cart_limit' => $cart_limit,
+    //         'variant_product' => $variant_product,
+    //         'availabile_stock_status' => $this->input->get_post('availabile_stock_status'),
+    //         'manage_stock' => $this->input->get_post('manage_stock'),
+    //         'package_weight' => $this->input->get_post('package_weight'),
+    //         'package_length' => $this->input->get_post('package_length'),
+    //         'package_breadth' => $this->input->get_post('package_breadth'),
+    //         'package_height' => $this->input->get_post('package_height')
+    //     );
+        
+    //     $insert_query = $this->db->insert('products', $ar);
+     
+    //     $product_id = $this->db->insert_id();
+    //     $mix = $product_id . '-' . $this->input->get_post('name');
+    //     $seo_url = preg_replace('/[^a-z0-9_-]/i', '', strtolower(str_replace(' ', '-', trim($mix))));
+    //     $this->common_model->update_record(['id' => $product_id], 'products', ['seo_url' => $seo_url]);
+    //     $filter_title = $this->input->get_post('filter');
+    //     if (isset($filter_title) && is_array($filter_title)) {
+    //     for ($i = 0; $i < count($filter_title); $i++) {
+    //         $filter_options = implode(",", $this->input->get_post('filters_' . $filter_title[$i]));
+
+    //         $filter_ar = array(
+    //             'filter_id' => $filter_title[$i],
+    //             'filter_options' => $filter_options,
+    //             'product_id' => $product_id
+    //         );
+
+    //         $this->db->insert('product_filter', $filter_ar);
+    //     }
+    // }
+    // else{
+    //     $filter_title=0;
+    // }
+
+    //     if ($insert_query) {
+
+      
+    //         $msg = "Product Inactive: Product having ID #" . $product_id . " created";
+    //         $array = array('vendor_id' => $_SESSION['vendors']['vendor_id'], 'message' => $msg, 'status' => 0, 'created_date' => time());
+    //         $this->db->insert("admin_notifications", $array);
+
+    //         if ($variant_product == 'no') {
+
+    //             $insert = array('product_id' => $product_id, 'price' => $this->input->get_post('price'), 'saleprice' => $this->input->get_post('saleprice'), 'stock' => $this->input->get_post('stock'), 'status' => 1, 'created_at' => time());
+
+    //             $ins = $this->db->insert('link_variant', $insert);
+
+    //             $vid = $this->db->insert_id($ins);
+
+    //             foreach ($productimage as $image) {
+
+    //                 $ar = array('product_id' => $product_id, 'variant_id' => $vid, 'image' => $image);
+
+    //                 $this->db->insert("product_images", $ar);
+    //             }
+
+    //             $this->session->set_tempdata('success_message', 'Product Added Successfully',3);
+
+    //             redirect('vendors/inactive_products');
+    //         } else {
+
+    //             $this->session->set_tempdata('success_message', 'Product Added Successfully',3);
+
+    //             redirect('vendors/inactive_products');
+    //         }
+
+
+    //         die();
+    //     } else {
+
+    //         $this->session->set_tempdata('error_message', 'Unable to add',3);
+
+
+    //         redirect('vendors/inactive_products');
+
+    //         die();
+    //     }
+    // }
+
+
+
+
     function insert_product() {
-
         $productimage = $this->upload_multiplefile('images');
-
-        $variant_product = $this->input->get_post('variant_product');
-
+        $variant_product = $this->sanitize($this->input->get_post('variant_product'));
+    
         if ($this->input->get_post('brand') != '') {
-            $brand = $this->input->get_post('brand');
+            $brand = $this->sanitize($this->input->get_post('brand'));
         } else {
             $brand = 0;
         }
-        if ($this->input->get_post('sub_cat_id') != '') {
-            $sub_cat_id = $this->input->get_post('sub_cat_id');
-        } else {
-            $sub_cat_id = Null;
-        }
-        if ($this->input->get_post('ques_id') != '') {
-            $ques_id = $this->input->get_post('ques_id');
-        } else {
-            $ques_id = Null;
-        }
-        
-
-
+    
         if ($this->input->get_post('product_tags') != '') {
-
-            $producttags = implode(",", $this->input->get_post('product_tags'));
+            $producttags = implode(",", array_map([$this, 'sanitize'], $this->input->get_post('product_tags')));
         } else {
-
             $producttags = '';
         }
-
+    
         if ($this->input->get_post('priority') != '') {
-
-            $priority = $this->input->get_post('priority');
+            $priority = $this->sanitize($this->input->get_post('priority'));
         } else {
-
             $priority = "";
         }
-        
+    
         if ($this->input->get_post('cart_limit') != '') {
-
-            $cart_limit = $this->input->get_post('cart_limit');
+            $cart_limit = $this->sanitize($this->input->get_post('cart_limit'));
         } else {
-
-            $cart_limit = Null;
+            $cart_limit = "";
         }
+    
         $optionIdString = $this->input->get_post('option_id');
-
-        // Check if $optionIdString is not empty and is a valid string
+        $implodedOptionIds = '';
         if (!empty($optionIdString) && is_string($optionIdString)) {
-            $optionIdArray = explode(",", $optionIdString);
-            
-            // Now, you can use implode on the array
+            $optionIdArray = array_map([$this, 'sanitize'], explode(",", $optionIdString));
             $implodedOptionIds = implode(",", $optionIdArray);
-        
-            // Use $implodedOptionIds as needed
         }
-
+    
         $ar = array(
-            'shop_id' => $_SESSION['vendors']['vendor_id'],
-            'name' => $this->input->get_post('name'),
-            'cat_id' => $this->input->get_post('cat_id'),
-            'sub_cat_id' => $sub_cat_id,
-            'ques_id' => $ques_id,
-            // Assuming 'option_id' is a comma-separated string
+            'shop_id' => $this->sanitize($_SESSION['vendors']['vendor_id']),
+            'name' => $this->sanitize($this->input->get_post('name')),
+            'cat_id' => $this->sanitize($this->input->get_post('cat_id')),
+            'sub_cat_id' => $this->sanitize($this->input->get_post('sub_cat_id')),
+            'ques_id' => $this->sanitize($this->input->get_post('ques_id')),
             'option_id' => $implodedOptionIds,
-            'key_features' => $this->input->get_post('key_features'),
-            'descp' => $this->input->get_post('description'),
-            'about' => $this->input->get_post('about'),
-            'how_to_use' => $this->input->get_post('how_to_use'),
+            'key_features' => $this->sanitize($this->input->get_post('key_features')),
+            'descp' => $this->sanitize($this->input->get_post('description')),
+            'about' => $this->sanitize($this->input->get_post('about')),
+            'how_to_use' => $this->sanitize($this->input->get_post('how_to_use')),
             'status' => 0,
             'created_at' => time(),
             'product_tags' => $producttags,
-            'return_noof_days' => $this->input->get_post('return_noof_days'),
-            'meta_tag_title' => $this->input->get_post('meta_tag_title'),
-            'meta_tag_description' => $this->input->get_post('meta_tag_description'),
-            'meta_tag_keywords' => $this->input->get_post('meta_tag_keywords'),
+            'return_noof_days' => $this->sanitize($this->input->get_post('return_noof_days')),
+            'meta_tag_title' => $this->sanitize($this->input->get_post('meta_tag_title')),
+            'meta_tag_description' => $this->sanitize($this->input->get_post('meta_tag_description')),
+            'meta_tag_keywords' => $this->sanitize($this->input->get_post('meta_tag_keywords')),
             'brand' => $brand,
-            'cancel_status' => $this->input->get_post('cancel_status'),
-            'top_deal' => $this->input->get_post('deal_product'),
+            'cancel_status' => $this->sanitize($this->input->get_post('cancel_status')),
+            'top_deal' => $this->sanitize($this->input->get_post('deal_product')),
             'priority' => $priority,
             'cart_limit' => $cart_limit,
             'variant_product' => $variant_product,
-            'availabile_stock_status' => $this->input->get_post('availabile_stock_status'),
-            'manage_stock' => $this->input->get_post('manage_stock'),
-            'package_weight' => Null,
-            'package_length' => Null,
-            'package_breadth' => Null,
-            'package_height' => Null
+            'availabile_stock_status' => $this->sanitize($this->input->get_post('availabile_stock_status')),
+            'manage_stock' => $this->sanitize($this->input->get_post('manage_stock')),
+            // 'package_weight' => $this->sanitize($this->input->get_post('package_weight')),sss
+            // 'package_length' => $this->sanitize($this->input->get_post('package_length')),
+            // 'package_breadth' => $this->sanitize($this->input->get_post('package_breadth')),
+            // 'package_height' => $this->sanitize($this->input->get_post('package_height'))
         );
-        // echo "<pre>"; print_r($ar); die;
-        // echo $this->db->last_query(); exit();
+    
         $insert_query = $this->db->insert('products', $ar);
-        printr($insert_query);die;
-        //echo $this->db->last_query(); 
         $product_id = $this->db->insert_id();
-        $mix = $product_id . '-' . $this->input->get_post('name');
+        $mix = $product_id . '-' . $this->sanitize($this->input->get_post('name'));
         $seo_url = preg_replace('/[^a-z0-9_-]/i', '', strtolower(str_replace(' ', '-', trim($mix))));
         $this->common_model->update_record(['id' => $product_id], 'products', ['seo_url' => $seo_url]);
+    
         $filter_title = $this->input->get_post('filter');
         if (isset($filter_title) && is_array($filter_title)) {
-        for ($i = 0; $i < count($filter_title); $i++) {
-            $filter_options = implode(",", $this->input->get_post('filters_' . $filter_title[$i]));
-
-            $filter_ar = array(
-                'filter_id' => $filter_title[$i],
-                'filter_options' => $filter_options,
-                'product_id' => $product_id
-            );
-
-            $this->db->insert('product_filter', $filter_ar);
+            for ($i = 0; $i < count($filter_title); $i++) {
+                $filter_options = implode(",", array_map([$this, 'sanitize'], $this->input->get_post('filters_' . $filter_title[$i])));
+    
+                $filter_ar = array(
+                    'filter_id' => $this->sanitize($filter_title[$i]),
+                    'filter_options' => $filter_options,
+                    'product_id' => $product_id
+                );
+    
+                $this->db->insert('product_filter', $filter_ar);
+            }
+        } else {
+            $filter_title = 0;
         }
-    }
-    else{
-        $filter_title=0;
-    }
-
+    
         if ($insert_query) {
-
-            //notification to admin
             $msg = "Product Inactive: Product having ID #" . $product_id . " created";
-            $array = array('vendor_id' => $_SESSION['vendors']['vendor_id'], 'message' => $msg, 'status' => 0, 'created_date' => time());
+            $array = array('vendor_id' => $this->sanitize($_SESSION['vendors']['vendor_id']), 'message' => $this->sanitize($msg), 'status' => 0, 'created_date' => time());
             $this->db->insert("admin_notifications", $array);
-
+    
             if ($variant_product == 'no') {
-
-                $insert = array('product_id' => $product_id, 'price' => $this->input->get_post('price'), 'saleprice' => $this->input->get_post('saleprice'), 'stock' => $this->input->get_post('stock'), 'status' => 1, 'created_at' => time());
-
+                $insert = array(
+                    'product_id' => $product_id,
+                    'price' => $this->sanitize($this->input->get_post('price')),
+                    'saleprice' => $this->sanitize($this->input->get_post('saleprice')),
+                    'stock' => $this->sanitize($this->input->get_post('stock')),
+                    'status' => 1,
+                    'created_at' => time()
+                );
+    
                 $ins = $this->db->insert('link_variant', $insert);
-
                 $vid = $this->db->insert_id($ins);
-
+    
                 foreach ($productimage as $image) {
-
-                    $ar = array('product_id' => $product_id, 'variant_id' => $vid, 'image' => $image);
-
+                    $ar = array('product_id' => $product_id, 'variant_id' => $vid, 'image' => $this->sanitize($image));
                     $this->db->insert("product_images", $ar);
                 }
-
-                $this->session->set_tempdata('success_message', 'Product Added Successfully',3);
-
+    
+                $this->session->set_tempdata('success_message', 'Product Added Successfully', 3);
                 redirect('vendors/inactive_products');
             } else {
-
-                $this->session->set_tempdata('success_message', 'Product Added Successfully',3);
-
+                $this->session->set_tempdata('success_message', 'Product Added Successfully', 3);
                 redirect('vendors/inactive_products');
             }
-
-
+    
             die();
         } else {
-
-            $this->session->set_tempdata('error_message', 'Unable to add',3);
-
-            //$this->load->view('vendors/products/add_product', $this->data);
-
+            $this->session->set_tempdata('error_message', 'Unable to add', 3);
             redirect('vendors/inactive_products');
-
             die();
         }
     }
+    
+    private function sanitize($input) {
+        return str_replace(
+            ['<', '>', '"', "'"],
+            ['&lt;', '&gt;', '&quot;', '&#039;'],
+            $input
+        );
+    }
+    
 
     function update_product() {
 
@@ -887,12 +1012,11 @@ class Inactive_products extends MY_Controller {
             $productimage = $this->upload_multiplefile('images');
         }
 
-        //$variant_product = $this->input->get_post('variant_product');
+
 
         $cancel_status = $this->input->get_post('cancel_status');
 
-        //$status = $this->input->get_post('status');
-        //$shop_id = $this->input->get_post('shop_id');
+    
 
         $brand = $this->input->get_post('brand');
 
@@ -962,7 +1086,7 @@ class Inactive_products extends MY_Controller {
         $wr = array('id' => $pid);
 
         $insert_query = $this->db->update('products', $data, $wr);
-        //echo $this->db->last_query(); die;
+        
         $mix = $pid . '-' . $name;
         $seo_url = preg_replace('/[^a-z0-9_-]/i', '', strtolower(str_replace(' ', '-', trim($mix))));
         $this->common_model->update_record(['id' => $pid], 'products', ['seo_url' => $seo_url]);
@@ -973,33 +1097,31 @@ class Inactive_products extends MY_Controller {
             $filter_options = implode(",", $this->input->get_post('filters_' . $filter_title[$i]));
 
             $filter_ar = array(
-                //'filter_id'=>  $filter_title[$i],
+             
                 'filter_options' => $filter_options,
-                    //'product_id' => $pid
+                   
             );
-            //print_r($filter_ar);die;
+          
             $check = $this->admin_model->count_filters($pid, $filter_title[$i]);
 
             if ($check > 0) {
-                //  echo '$check >0';die;
+               
                 $this->admin_model->update_filter($pid, $filter_title[$i], $filter_ar);
-                //$insert_filter_query = $this->db->update('product_filter', $filter_ar);  
-//                echo $this->db->last_query();
-//               die;
+              
             } else {
                 $filter_ar = array(
                     'filter_id' => $filter_title[$i],
                     'filter_options' => $filter_options,
                     'product_id' => $pid
                 );
-                //  echo '$check <0';die;
+                
                 $this->db->insert('product_filter', $filter_ar);
             }
         }
 
         if ($insert_query) {
 
-            //notification to admin
+            
             $msg = "Product Inactive: Product ID #" . $pid . " updated";
             $array = array('vendor_id' => $shop_id, 'message' => $msg, 'status' => 0, 'created_date' => time());
             $this->db->insert("admin_notifications", $array);
@@ -1042,89 +1164,7 @@ class Inactive_products extends MY_Controller {
         }
     }
 
-    /* function uploadImages()
-
-      {
-
-      $pid = $this->input->post('pid');
-
-      $vid = $this->input->post('vid');
-
-
-
-      $image=$this->upload_file('image');
-
-      if($image!='')
-
-      {
-
-      $ar = array('product_id'=>$pid,'variant_id'=>$vid,'image'=>$image);
-
-      $ins = $this->db->insert("product_images",$ar);
-
-
-
-      if($ins)
-
-      {
-
-      $image=='';
-
-      $this->session->set_tempdata('success_message', 'Product Image added Successfully',3);
-
-
-
-      }
-
-      }
-
-
-
-      $this->data['pid']=$this->input->post('pid');
-
-      $this->data['vid']=$this->input->post('vid');
-
-      $this->load->view('vendors/includes/header', $this->data);
-
-      $this->load->view('vendors/product_images', $this->data);
-
-      redirect('vendors/inactive_products/product_images/'.$pid."/".$vid);
-
-      $this->load->view('vendors/includes/footer');
-
-      } */
-      private function upload_to_bunnycdn($filePath, $fileName) {
-        $yourStorageZone = 'absolutemens';
-        $accessKey = '6070959d-682a-422e-96dd0290f95f-54ce-4a6e';
-        $url = "https://storage.bunnycdn.com/{$yourStorageZone}/{$fileName}";
-
-        // print_r($filePath);
-        // exit();
-    
-        $fileStream = fopen($filePath, 'r');
-    
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_PUT, true);
-        curl_setopt($ch, CURLOPT_INFILE, $fileStream);
-        curl_setopt($ch, CURLOPT_INFILESIZE, filesize($filePath));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "AccessKey: {$accessKey}",
-        ));
-    
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    
-        fclose($fileStream);
-        curl_close($ch);
-    
-        if ($httpCode === 201) { // Assuming 201 Created status code for success
-            return "https://absolutemensCDN.b-cdn.net/{$fileName}";
-        } else {
-            return false;
-        }
-    }
-
+   
     private function upload_multiplefile($file_name) {
 
         $config = array(
@@ -1154,21 +1194,56 @@ class Inactive_products extends MY_Controller {
             $this->upload->initialize($config);
 
             if ($this->upload->do_upload('images[]')) {
-                $uploadData =$this->upload->data();
+                $uploadData =    $this->upload->data();
                 $filePath = $uploadData['full_path'];
 
-                // Upload to BunnyCDN
-                    $bunnyResponse = $this->upload_to_bunnycdn($filePath, $fileName);
-                    if ($bunnyResponse === false) {
-                        return false;
-                    }
-
+            // Upload to BunnyCDN
+                $bunnyResponse = $this->upload_to_bunnycdn($filePath, $fileName);
+                if ($bunnyResponse === false) {
+                    return false;
+                }
             } else {
                 return false;
             }
         }
         return $images;
     }
+
+    private function upload_to_bunnycdn($filePath, $fileName) {
+        $yourStorageZone = 'absolutemens';
+        $accessKey = '6070959d-682a-422e-96dd0290f95f-54ce-4a6e';
+        $url = "https://storage.bunnycdn.com/{$yourStorageZone}/{$fileName}";
+
+        print_r($filePath);
+        exit();
+    
+        $fileStream = fopen($filePath, 'r');
+    
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_PUT, true);
+        curl_setopt($ch, CURLOPT_INFILE, $fileStream);
+        curl_setopt($ch, CURLOPT_INFILESIZE, filesize($filePath));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "AccessKey: {$accessKey}",
+        ));
+    
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+        fclose($fileStream);
+        curl_close($ch);
+    
+        if ($httpCode === 201) { // Assuming 201 Created status code for success
+            return "https://absolutemensCDN.b-cdn.net/{$fileName}";
+        } else {
+            return false;
+        }
+    }
+
+
+
+
 
     function insert_variant() {
 
@@ -2341,24 +2416,12 @@ class Inactive_products extends MY_Controller {
 
         redirect('vendors/inactive_products');
 
-        /* $this->load->view('vendors/includes/header', $this->data);
 
-          $this->load->view('vendors/import_product', $this->data);
-
-          $this->load->view('vendors/includes/footer'); */
     }
 
 }
 
-/*
 
-     * To change this license header, choose License Headers in Project Properties.
-
-     * To change this template file, choose Tools | Templates
-
-     * and open the template in the editor.
-
-     */
 
 
 
