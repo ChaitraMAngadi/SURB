@@ -49,6 +49,7 @@
                                     <th>Description</th>
                                     <th>Name</th>
                                     <th>Prime Membership value</th>
+                                    <th>Prime Membership validity in days</th>
                                     <th class="notexport">Action</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,9 @@
                                           <td>
                                             <?php echo $v->value;?>
                                             </td>
+                                            <td>
+                                            <?php echo !empty($v->validity) ? $v->validity : 'Lifetime';?>
+                                          </td>
                                         <td>
                                             <div><a href="<?php echo base_url();?>admin/prime/edit/<?php echo $v->id;?>">
                                            <button class="btn btn-info">Edit</button>

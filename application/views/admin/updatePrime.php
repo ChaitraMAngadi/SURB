@@ -58,6 +58,12 @@
                         </div>
         </div>
         <div class="form-group">
+                       
+                       <div class="col-lg-12">
+                           <input type="number" id="validity_prime" min="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..?)\../g, '$1');" name="validity_prime" class="form-control" value="<?php echo $p->validity;?>" placeholder="Enter validity in days of the prime life time if not entered">
+                       </div>
+       </div>
+        <div class="form-group">
 
 
 

@@ -8422,37 +8422,18 @@ opacity: 1;">Move to Wishlist</button>
     }
 
     function applyCoupon($coupon_code, $session_id, $grand_total, $total_amount, $user_id,$products) {
-        
-     
-
         $date = date("Y-m-d");
-
         $chk_qry = $this->db->query("select * from cash_coupons where user_id='" . $user_id . "' and coupon_code='" . $coupon_code . "'  and ( start_date<='" . $date . "' and expiry_date>='" . $date . "' )");
-        
-            // print_r($ar2);
-        // exit;
-       
-
         if ($chk_qry->num_rows() > 0) {
-
             $chk_cash_coupon_row = $chk_qry->row();
-
             $discount = $chk_cash_coupon_row->amount;
-
             if ($grand_total > $discount) {
-
                 $final_amount = $grand_total - $discount;
             } else {
-
                 $final_amount = 0;
             }
-
-
-
-            echo '@success@' . $final_amount . '@' . $discount . '@' . $chk_cash_coupon_row->id . '@' . $coupon_code;
+           echo '@success@' . $final_amount . '@' . $discount . '@' . $chk_cash_coupon_row->id . '@' . $coupon_code;
             die;
-
-            // return array('status' =>TRUE,'message'=>"Coupon Applied successfully",'grand_total' =>$final_amount,'discount' =>$discount,'coupon_id'=>$chk_cash_coupon_row->id,'coupon_code'=>$coupon_code);
         } else {
 
 
@@ -8554,111 +8535,73 @@ if (!$brand_matched) {
     }
 
     function getCouponcodes($user_id, $session_id,$brands_array,$total_cart_amount) {
-       
-    //    print_r($brands_array);
-    //    exit;
-        $cart_qry = $this->db->query("select * from cart where session_id='" . $session_id . "' group by session_id");
-        
+        $cart_qry = $this->db->query("select * from cart where session_id='" . $session_id . "' group by session_id");    
         $cart_row = $cart_qry->row();
-
         $shop_id = $cart_row->vendor_id;
-
         $date = date("Y-m-d");
-
         $cashcoupon_qry = $this->db->query("select * from cash_coupons where user_id='" . $user_id . "' and ( start_date<='" . $date . "' and expiry_date>='" . $date . "' )");
-       
-
         $cashcoupon_result = $cashcoupon_qry->result();
-
         $ar1 = [];
-
         foreach ($cashcoupon_result as $value) {
-
             $order_qry1 = $this->db->query("select * from orders where user_id='" . $user_id . "' and coupon_id='" . $value->id . "'");
-
             $order_num_rows1 = $order_qry1->num_rows();
-
-          
-
-            if ($order_num_rows1 > 0) {
-                
+            if ($order_num_rows1 > 0) {    
             } else {
-
                 $ar1[] = array('id' => $value->id, 'coupon_code' => $value->coupon_code, 'description' => $value->description, 'percentage' => $value->percentage, 'maximum_amount' => $value->amount, 'minimum_order_amount' => "");
             }
         }
-
         $order_qry_user = $this->db->query("SELECT * FROM orders WHERE user_id='" . $user_id . "'");
         $order_row_user = $order_qry_user->num_rows();
         $user = $this->db->get_where('users', array('id' => $user_id))->row_array();
-
         $existing_tags = json_decode($user['Tag'], true);
-        
-        // Query coupons based on existing tags
         $qry = $this->db->query("
             SELECT * FROM coupon_codes WHERE 
             (shop_id = '" . $shop_id . "' OR shop_id = 0) AND 
             (start_date <= '" . $date . "' AND expiry_date >= '" . $date . "' AND minimum_order_amount <= '" . $total_cart_amount . "') 
         ");
-        
         $coupons_related = $qry->result();
-        
-        $data_coupon = []; // Initialize an array to store all matching data_coupon values
+        $data_coupon = []; 
         $brand_coupon = [];
         foreach ($coupons_related as $res) {
-            $coup = json_decode($res->Tag, true); // Decode as associative array
+            $coup = json_decode($res->Tag, true); 
             if ($coup !== null && is_array($coup)) {
-                // Check if $coup is not null and is an array
-                $matched = false; // Variable to track if any tags match existing tags
+                $matched = false; 
                 foreach ($coup as $tag) {
                     if (is_array($existing_tags) && in_array($tag, $existing_tags)) {
-                        // Check if $existing_tags is an array before using in_array()
                         $matched = true;
-                        break; // Exit the loop once a match is found
+                        break; 
                     }
                 }
                 if ($matched) {
-                    $data_coupon[] = $coup; // Add the matching data_coupon to the array
+                    $data_coupon[] = $coup;
                 }
             }
-        
             $existingbrands = $brands_array;
             $brands = json_decode($res->brands, true);
             if ($brands !== null && is_array($brands)) {
-                // Check if $brands is not null and is an array
                 $matched_brand = false;
                 foreach ($brands_array as $brand) {
                     if (is_array($existingbrands) && in_array($brand, $brands)) {
-                        // Check if $existingbrands is an array before using in_array()
                         $matched_brand = true;
-                        break; // Exit the loop once a match is found
+                        break; 
                     }
                 }
                 if ($matched_brand) {
-                    $brand_coupons[] = $brands; // Add the matching brand to the array
+                    $brand_coupons[] = $brands; 
                 }
             }
         }
-        // print_r($brand_coupons);
-        // exit;
-        
         $data_coupons_flat = [];
         if (!empty($data_coupon)) {
-            // Flatten the data_coupon array to extract unique tags
             $data_coupons_flat = array_merge(...$data_coupon);
             $data_coupons_flat = array_unique($data_coupons_flat);
         }
-        
-        // Ensure $brand_coupons is an array
         $brands_condition = "";
         if (!empty($brand_coupons)) {
-            // Flatten the array and get unique brands
             $flattened_brands = array_unique(array_merge(...$brand_coupons));
             $brands_condition = "'" . implode("', '", $flattened_brands) . "'";
             $brands_condition = "brands IN ($brands_condition)";
         }
-        
-        // Construct the WHERE clause for tags
         $where_clause = "";
         if (!empty($data_coupons_flat)) {
             foreach ($data_coupons_flat as $tag) {
@@ -8666,8 +8609,6 @@ if (!$brand_matched) {
             }
             $where_clause = ltrim($where_clause, " OR");
         }
-        
-        // Construct the WHERE clause for brands
         $brands_where_clause = "";
         if (!empty($brand_coupons)) {
             foreach ($brand_coupons as $brand) {
@@ -8675,14 +8616,9 @@ if (!$brand_matched) {
             }
             $brands_where_clause = ltrim($brands_where_clause, " OR");
         }
-        
-        // Additional conditions
         $additional_conditions = "(Tag = '' OR Tag IS NULL OR JSON_LENGTH(Tag) = 0 OR Tag = '[]' OR Tag ='null')";
         $additional_brands = "(brands = '' OR brands IS NULL OR brands ='null' OR JSON_LENGTH(brands) = 0 OR brands = '[]')";
-        
-        // Construct the SQL query based on conditions
         if (!empty($where_clause) && !empty($brands_condition)) {
-            // Condition 4: If both brand and tag are present
             $qry = $this->db->query("
                 SELECT * FROM coupon_codes WHERE 
                 (shop_id = '" . $shop_id . "' OR shop_id = 0) 
@@ -8693,11 +8629,8 @@ if (!$brand_matched) {
                 OR   ($additional_brands)
                 AND   ($brands_where_clause))
             ");
-        }
-        
-        
+        } 
         elseif (!empty($where_clause) && empty($brands_condition)) {
-            // Condition 2: If only tag is present
             $qry = $this->db->query("
                 SELECT * FROM coupon_codes WHERE 
                 (shop_id = '" . $shop_id . "' OR shop_id = 0) AND 
@@ -8715,7 +8648,6 @@ if (!$brand_matched) {
             ");
         }
          else {
-            // Condition 3: If both brand and tag are absent
             $qry = $this->db->query("
                 SELECT * FROM coupon_codes WHERE 
                 (shop_id = '" . $shop_id . "' OR shop_id = 0) AND 
@@ -8723,63 +8655,15 @@ if (!$brand_matched) {
                 AND (($additional_conditions OR $additional_brands) AND($additional_conditions AND $additional_brands))
             ");
         }
-        
-        // Get the result of the query
         $dat = $qry->result();
-        // echo "<pre>";
-        // print_r($dat);
-        // exit;
-// foreach ($dat as $value) {
-//     $brands_decode = json_decode($value->brands);
-    
-//     // Check if brands are null or empty
-//     if (empty($brands_decode)) {
-//         print("Coupon accepted (no specified brands)<br>");
-//         continue; // Skip to the next coupon
-//     }
-    
-//     // Check if any brand from $brands_array matches with the decoded brands
-//     $match_found = false;
-//     foreach ($brands_array as $brand) {
-//         if (in_array($brand, $brands_decode)) {
-//             $match_found = true;
-//             break;
-//         }
-//     }
-    
-//     if ($match_found) {
-//         print("Coupon accepted (matching brands)<br>");
-//     } else {
-//         print("Coupon skipped (no matching brands)<br>");
-//     }
-// }
-// exit;
-
-        
-        
-                            // } 
-     
-
-        
         if ($qry->num_rows() > 0) {
             $ar = [];
-            // echo "<pre>";
             foreach ($dat as $value) {
                 
                 $brands_decode = json_decode($value->brands);
-    
-    // Convert null to an empty array
                 if ($brands_decode === null) {
                     $brands_decode = [];
                 }
-    
-    // Check if brands are empty
-    // if (empty($brands_decode)) {
-    //     // print("Coupon accepted (no specified brands)<br>");
-    //     continue; // Skip to the next coupon
-    // }
-    
-    // Check if any brand from $brands_array matches with the decoded brands
                 $match_found = false;
                 foreach ($brands_array as $brand) {
                     if (in_array($brand, $brands_decode)) {
@@ -8787,12 +8671,6 @@ if (!$brand_matched) {
                         break;
                     }
                 }
-                
-                // if ($match_found) {
-                //     print("Coupon accepted (matching brands)<br>");
-                // } else {
-                //     print("Coupon skipped (no matching brands)<br>");
-                // }
             if($match_found || empty($brands_decode)){
             $order_qry = $this->db->query("SELECT * FROM orders WHERE user_id='" . $user_id . "' AND coupon_id='" . $value->id . "'");
             $order_row2 = $order_qry->row();
@@ -8800,39 +8678,22 @@ if (!$brand_matched) {
                 $count_qry = $this->db->query("SELECT limit_user FROM coupon_codes WHERE id='" . $value->id . "' AND coupon_code='" . $value->coupon_code . "'");
                 $res = $count_qry->row();
                 $limit_user = ($res) ? $res->limit_user : 0;
-                $count = 0;
-                
-                
-        
+                $count = 0; 
                 $order_row = $order_qry->row();
                 $order_num_rows = $order_qry->num_rows();
                 $order_result=$order_qry->result();
-                // echo "<pre>";
-            //   $custom_count=0;
                 foreach($order_result as $re){
-                    // print_r($re->coupon_code);
                     if($re->coupon_code == $value->coupon_code){
-
                     $ins = $this->db->insert("custom_coupons", array('user_id' => $user_id, 'coupon_name' => $value->coupon_code, 'count' => 1));
                     }
                     $count_custom_qry= $this->db->query("SELECT count,coupon_name FROM custom_coupons WHERE user_id='" . $user_id . "' AND coupon_name='" . $re->coupon_code . "'");
-                    // echo "<pre>";
-                    $custom_res=$count_custom_qry->result();
-                    
-                  
+                    $custom_res=$count_custom_qry->result();  
                 }
                 if($limit_user>= $order_num_rows){
                 $this->db->where(array('user_id' => $user_id, 'coupon_name' => $value->coupon_code));
                 $this->db->update('custom_coupons', array('count' => $order_num_rows));
-               
                 }
-        
-                if ($order_num_rows >= $limit_user || $order_num_rows >= $value->utilization) {
-                   
-                   
-            
-                        // Insert into custom_coupons table for the first time
-                       
+                if ($order_num_rows >= $limit_user || $order_num_rows >= $value->utilization) {       
                 }
               
                 else {
@@ -8866,7 +8727,6 @@ if (!$brand_matched) {
             return array();
         }
     }
-   
     }
 
     function onesignalnotification($vendor_id, $title, $message) {

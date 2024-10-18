@@ -94,6 +94,7 @@ class Prime extends MY_Controller {
     function updatePrime(){
         $name= $this->input->get_post('Name');
         $description =$this->input->get_post('Description');
+        $validity=$this->input->get_post('validity_prime');
         $value=$this->input->get_post('value_prime');
         $id=$this->input->get_post('id');
         if (!empty($_FILES["app_image"]["name"])) {
@@ -113,9 +114,11 @@ class Prime extends MY_Controller {
             $k_image="";
         }
         $this->db->where('id',$id);
+        $validity = !empty($validity) ? $validity : NULL;
         $array=array(
             'Description'=>$description,
             'Name'=>$name,
+            'validity'=>$validity,
             'value'=>$value,
             'image'=>$k_image
         );
@@ -137,6 +140,7 @@ class Prime extends MY_Controller {
         $name= $this->input->get_post('Name');
         $description =$this->input->get_post('Description');
         $value=$this->input->get_post('value_prime');
+        $validity=$this->input->get_post('validity_prime');
         // $image=$this->input->post('app_image');
         if (!empty($_FILES["app_image"]["name"])) {
             $img_k_image = "prime_" . date('YmdHis') . ".jpg";
@@ -153,13 +157,15 @@ class Prime extends MY_Controller {
             // $this->session->set_tempdata('error_message', 'Something went wrong, unable to insert image',3);
             // redirect('admin/coupons');
         }
-        // print_r($k_image);
-        // exit;
-        // die;
+        
+        $validity = !empty($validity) ? $validity : NULL;
+
+
         $array=array(
             'Description'=>$description,
             'Name'=>$name,
             'value'=>$value,
+            'validity'=>$validity,
             'image'=>$k_image
         );
         $qry=$this->db->insert('prime_table',$array);
